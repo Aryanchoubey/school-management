@@ -1,1 +1,268 @@
 @import "tailwindcss";
+
+
+
+/* Color Palette */
+:root {
+  /* Base Colors */
+  --background: #fffef7; /* off-white */
+  --foreground: oklch(0.13 0.028 261.692); /* dark text */
+
+  /* UI Colors */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.13 0.028 261.692);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.13 0.028 261.692);
+
+  /* Primary Colors - switched to yellow */
+  --primary: #fbbf24; /* amber-400 */
+  --primary-foreground: #000000;
+
+  /* Secondary Colors */
+  --secondary: #f59e0b; /* amber-500 */
+  --secondary-foreground: #ffffff;
+
+  /* Muted Colors */
+  --muted: #fef3c7; /* amber-100 */
+  --muted-foreground: #524943; /* amber-800 */
+
+  /* Accent Colors */
+  --accent: #fffbeb; /* amber-50 */
+  --accent-foreground: #78350f; /* amber-900 */
+
+  /* Destructive Colors */
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: #ffffff;
+
+  /* Borders & Inputs */
+  --border: oklch(0.928 0.006 264.531);
+  --input: oklch(0.928 0.006 264.531);
+  --ring: oklch(0.707 0.022 261.325);
+
+  /* Chart Colors (adjusted for yellow palette) */
+  --chart-1: #facc15; /* yellow-400 */
+  --chart-2: #f59e0b; /* amber-500 */
+  --chart-3: #d97706; /* amber-600 */
+  --chart-4: #eab308; /* yellow-500 */
+  --chart-5: #fef08a; /* yellow-200 */
+
+  /* Success, Warning, Error Colors */
+  --success: #34d399;
+  --success-foreground: #ffffff;
+  --warning: #fbbf24;
+  --warning-foreground: #ffffff;
+  --error: #f87171;
+  --error-foreground: #ffffff;
+
+  /* Radius */
+  --radius: 0.625rem;
+
+  /* Sidebar Colors (amber/yellow theme) */
+  --sidebar-background: #fffbeb; /* amber-50 */
+  --sidebar-foreground: #78350f; /* amber-900 */
+  --sidebar-primary: #f59e0b; /* amber-500 */
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #fef3c7; /* amber-100 */
+  --sidebar-accent-foreground: #78350f;
+  --sidebar-border: #fde68a; /* amber-200 */
+  --sidebar-ring: #facc15; /* yellow-400 */
+
+  /* Custom Yellow Shades */
+  --yellow-darkest: #78350f;
+  --yellow-darker: #b45309;
+  --yellow-dark: #f59e0b;
+  --yellow-light: #fcd34d;
+  --yellow-lightest: #fef9c3;
+
+  /* Custom Colors */
+  --white: #ffffff;
+  --grayish-yellow: #fffbea;
+
+  /* Match Rating Colors */
+  --red-match: #ef1c1c;
+  --yellow-match: #ffd700;
+  --green-match: #69a600;
+  --light-red-match: #fdecec;
+  --light-yellow-match: #fefdeb;
+  --light-green-match: #f0fdf4;
+
+  /* Hangout Colors */
+  --squad-hangout: #f59e0b;
+  --general-hangout: #fbbf24;
+
+  /* Color Aliases */
+  --color-yellow-dark: #f59e0b;
+  --color-yellow-darker: #b45309;
+  --color-yellow-light: #fcd34d;
+  --color-yellow-lightest: #fef9c3;
+  --color-grayish-yellow: #fffbea;
+
+  --color-green-match: #4caf50;
+  --color-yellow-match: #ffbd59;
+  --color-red-match: #e57373;
+}
+
+
+.dark {
+  --background: oklch(0.13 0.028 261.692);
+  --foreground: oklch(0.985 0.002 247.839);
+  --card: oklch(0.13 0.028 261.692);
+  --card-foreground: oklch(0.985 0.002 247.839);
+  --popover: oklch(0.13 0.028 261.692);
+  --popover-foreground: oklch(0.985 0.002 247.839);
+  --primary: oklch(0.985 0.002 247.839);
+  --primary-foreground: oklch(0.21 0.034 264.665);
+  --secondary: oklch(0.278 0.033 256.848);
+  --secondary-foreground: oklch(0.985 0.002 247.839);
+  --muted: oklch(0.278 0.033 256.848);
+  --muted-foreground: oklch(0.707 0.022 261.325);
+  --accent: oklch(0.278 0.033 256.848);
+  --accent-foreground: oklch(0.985 0.002 247.839);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.278 0.033 256.848);
+  --input: oklch(0.278 0.033 256.848);
+  --ring: oklch(0.446 0.03 256.802);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar-background: oklch(0.21 0.034 264.665);
+  --sidebar-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-accent: oklch(0.278 0.033 256.848);
+  --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-border: oklch(0.278 0.033 256.848);
+  --sidebar-ring: oklch(0.446 0.03 256.802);
+}
+
+/* Theme Configuration */
+@theme inline {
+  /* Color Mapping */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Success, Warning, Error Colors */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
+
+  /* Custom Colors */
+  --color-green-darkest: var(--green-darkest);
+  --color-green-darker: var(--green-darker);
+  --color-green-dark: var(--green-dark);
+  --color-green-light: var(--green-light);
+  --color-green-lightest: var(--green-lightest);
+  --color-white: var(--white);
+  --color-grayish-green: var(--grayish-green);
+  --color-red-match: var(--red-match);
+  --color-yellow-match: var(--yellow-match);
+  --color-green-match: var(--green-match);
+  --color-light-red-match: var(--light-red-match);
+  --color-light-yellow-match: var(--light-yellow-match);
+  --color-light-green-match: var(--light-green-match);
+  --color-squad-hangout: var(--squad-hangout);
+  --color-general-hangout: var(--general-hangout);
+
+  /* Border Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-full: 100%;
+
+  /* Custom Border Sizes */
+  --border-5: 5px;
+  --border-8: 8px;
+  --border-12: 12px;
+  --border-15: 15px;
+  --border-20: 20px;
+  --border-25: 25px;
+  --border: 162 47% 76%;
+  --input: 162 47% 76%;
+  --ring: 167 70% 27%;
+
+  /* Sidebar Colors */
+  --color-sidebar: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* Font Families */
+@theme {
+  --font-family-geist: "Geist", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --font-family-sans: "Nunito Sans", SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  /* Font Sizes */
+  --font-size-10: 10px;
+  --font-size-15: 15px;
+  --font-size-20: 20px;
+  --font-size-25: 25px;
+  --font-size-30: 30px;
+  --font-size-35: 35px;
+
+  /* Line Heights */
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+
+  /* Box Shadows */
+  --shadow-card: 0 0 6px 1px rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Container Config from old setup */
+  --container-padding: 2rem;
+  --container-2xl: 1400px;
+}
+
+.bg-card {
+  background-color: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+}

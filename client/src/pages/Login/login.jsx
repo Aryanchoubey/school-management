@@ -1,61 +1,108 @@
-import { Image } from "@radix-ui/react-avatar"
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+  const navigate = useNavigate()
+
+  const navigateToSignup = () => {
+    navigate('/signup')
+  }
+
   return (
-    <>
-      <div className=" flex bg-[url(')] lg:h-screen sm:h-fit w-auto justify-center lg:pt-20 lg:pb- ">
-        <div className=" flex h-[500px] w-[80%] lg:w-full lg:h-[90%] gap- lg:ml-20 lg:mb-0 border-2 rounded-2xl lg:mr-20 mr lg:pr-0 pr- lg:mt-1 lg:justify-between justify-center lg:justify-items-normal mt-10 mb-10">
-          <div className="max-h-fit md:max-w-fit w-[40%] lg:min-w-fit lg:max-h-full lg:flex hidden overflow-hidden object-cover  "> 
-          <img className="h-[400px] md:w-[50%] w-auto lg:min-h-full lg:w-auto lg:flex hidden lg:object-cover rounded-l-xl" src="https://imgs.search.brave.com/tN6wno47SQgjxHPhOQ4A4J3OL0hjyrKdov5q7s4L9FA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAyMi8x/Mi8wMS8wNC80Mi9t/YW4tNzYyODMwNV82/NDAuanBn" alt="" />
-          
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <Card className="w-full max-w-6xl mx-auto shadow-2xl overflow-hidden">
+        <div className="flex flex-col lg:flex-row min-h-[600px]">
+          {/* Left side - Image */}
+          <div className="lg:w-1/2 hidden lg:block relative">
+            <img 
+              className="w-full h-full object-cover" 
+              src="https://imgs.search.brave.com/tN6wno47SQgjxHPhOQ4A4J3OL0hjyrKdov5q7s4L9FA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAyMi8x/Mi8wMS8wNC80Mi9t/YW4tNzYyODMwNV82/NDAuanBn" 
+              alt="Login illustration" 
+            />
+            <div className="absolute inset-0 bg-black/20"></div>
+          </div>
+
+          {/* Right side - Form */}
+          <CardContent className="lg:w-1/2 p-2 lg:p-8 flex flex-col justify-center">
+            {/* Toggle Buttons */}
+            <div className="flex gap-2 mb-8">
+              <Button 
+                className="flex-1 bg-amber-400 hover:bg-amber-500 text-black font-medium rounded-full h-12"
+                size="lg"
+              >
+                Login
+              </Button>
+              <Button 
+                onClick={navigateToSignup}
+                variant="secondary" 
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full h-12"
+                size="lg"
+              >
+                Register
+              </Button>
+            </div>
+
+            {/* Welcome Section */}
+            <div className="mb-8">
+              <h1 className="text-3xl lg:text-4xl font-semibold text-gray-900 mb-3">
+                Welcome
+              </h1>
+              <p className="text-gray-600 text-base">
+                Please login to your account
+              </p>
+            </div>
+
+            {/* Form Inputs */}
+            <div className="space-y-6 mb-8">
+              <div className="space-y-2">
+                <Input
+                  type="email"
+                  placeholder="Email or username"
+                  className="h-12 text-base border-0 border-b-2 border-gray-200 rounded-none bg-transparent focus:border-amber-400 focus:ring-0 px-0"
+                />
+              </div>
+              <div className="space-y-2">
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  className="h-12 text-base border-0 border-b-2 border-gray-200 rounded-none bg-transparent focus:border-amber-400 focus:ring-0 px-0"
+                />
+              </div>
+            </div>
+
+            {/* Forgot Password and Submit */}
+            <div className="flex justify-between items-center mb-8">
+              <Button 
+                variant="link"
+                className=" text-gray-600 pl-0  underline"
+              >
+                Forgot Password?
+              </Button>
+              <Button 
+                size="lg"
+              >
+                Login
+              </Button>
+            </div>
+
+            {/* Footer Links */}
+            <div className="space-y-4 text-center text-sm text-gray-600">
+              <p className="hover:text-gray-900 cursor-pointer">
+                Register Your School in Our Apps
+              </p>
+              <p className="hover:text-gray-900 cursor-pointer">
+                Terms and Conditions & Privacy Policy
+              </p>
+            </div>
+          </CardContent>
         </div>
-        <div className="lg:w-[50%]  flex flex-col pl-5 lg:pr-5 pt-3 lg:pt-20 lg:ml-10 pr-4 ">
+      </Card>
+    </div>
+  );
+};
 
-         <div className="flex lg:w-[100%] w-[100%]  gap-1  lg:gap-1 ">
-          <div className="lg:h-[40px] lg:w-[40%] w-[50%] h-[45px] flex bg-amber-400  items-center justify-center cursor-pointer  rounded-3xl">
-           <button className=" cursor-pointer ">Login</button>
-          </div>
-          <div className="lg:h-[40px] lg:w-[40%] w-[50%] h-[45px] flex bg-gray-300 items-center cursor-pointer  justify-center  rounded-3xl">
-           <button className="cursor-pointer">Register</button>
-          </div>
-           
-         </div>
-         <div className="lg:mb-3 mb-4 ">
-          <div className=" mt-10 lg:mt-5 lg:mb-3 mb-2 ">
-            <p className=" lg:text-4xl font-semibold text-2xl ">Welcome</p>
-          </div>
-          <div>
-            <p>Please login to your account</p>
-          </div>
-         </div>
-         <div className="flex flex-col pt-2 lg:pt-2 lg:gap-2 gap-2">
-          <div className="h-[20px] lg:h-[40px] flex items-cent justify-cen lg:pr-0 pr-2  "><input className="  border-transparent w-full  h-full  " type="search" name="" id="" placeholder="email or username"/> 
-            </div><hr className="lg:w-full w-[95%] " />
-         <div className="h-[20px] lg:h-[40px] flex items-center justify-center lg:pr-0 pr-2 "> <input className="  w-full h-full" type="search" name="" id="" placeholder="password" />
-          </div><hr  className="lg:w-full w-[95%] " />
-         </div>
-         <div className=" w-full flex justify-between pr-2 mt-4 pt-5 ">
-          <div className=" flex justify-center  items-center  " >
-            <p className="lg:text-sm text-sm  ">Forgot Password <hr /></p>
-          </div>
-          <div className="bg-amber-400 lg:rounded-xl rounded-3xl h-[40px] w-[70px] lg:h-[40px]  lg:w-[20%] flex justify-center items-center lg:pr-1  lg:mr-3 mr-3 ">
-           <button>Ok</button>
-          </div>
-         </div>
-         <div className=" flex lg:justify-center pt-10 lg:pl-0 p ">
-          <p>Register Your School in Our Apps</p>
-         </div>
-         <div className=" flex justify-center pt-5 lg:mb-10  ">
-          <p>Terms and Conditions & Privacy Policy</p>
-         </div>
-         
-
-        </div>
-        </div>
-      </div>
-    </>
-  )
-}
-
-
-export default Login
+export default Login;

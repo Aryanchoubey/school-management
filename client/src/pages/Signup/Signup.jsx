@@ -104,61 +104,7 @@ const SignUp = () => {
             </div>
           </CardContent>
         </div>
-      </div>
-    </div>
-  )
-}
-
-export default SignUp
-
-// ---------------- Step 1 ----------------
-const AccountInfo = ({ nextStep }) => {
-  return (
-    <div className="w-full flex flex-col items-center max-w-md">
-      <h2 className="text-2xl font-bold mb-6">Setup your Account</h2>
-
-      <input className="border p-2 mb-4 w-full rounded-md" placeholder="Enter Email Address or Mobile Number" />
-      <input className="border p-2 mb-4 w-full rounded-md" placeholder="Enter Your Organisation Name" />
-      <input className="border p-2 mb-6 w-full rounded-md" placeholder="Enter Your School Name" />
-
-      <button
-        onClick={nextStep}
-        className="bg-amber-400 rounded-lg p-2 w-32 mt-4 hover:bg-amber-500"
-      >
-        Next →
-      </button>
-    </div>
-  )
-}
-
-// ---------------- Step 2 ----------------
-const PlanSelection = ({ nextStep, prevStep }) => {
-  const plans = [
-    { name: "Free", price: "₹1000" },
-    { name: "Basic", price: "₹2000" },
-    { name: "Standard", price: "₹6000" },
-    { name: "Premium", price: "₹9000" },
-  ]
-
-  return (
-    <div className="w-full max-w-3xl">
-      <h2 className="text-2xl font-bold mb-6 text-center">Choose Your Plan</h2>
-      <div className="grid grid-cols-2  lg:grid-cols-2 gap-6">
-        {plans.map((p, i) => (
-          <Card
-            key={i}
-            className="p-6 cursor-pointer hover:shadow-lg border rounded-lg flex flex-col justify-between h-40"
-          >
-            <h3 className="font-semibold text-lg">{p.name}</h3>
-            <p className="text-gray-600">{p.price}</p>
-          </Card>
-        ))}
-      </div>
-
-      <div className="flex justify-between mt-8 lg:pb-3 pb-3 ">
-        <button onClick={prevStep} className="bg-gray-300 rounded-lg  p-2 w-24 hover:bg-gray-400">← Back</button>
-        <button onClick={nextStep} className="bg-amber-400 rounded-lg p-2 w-24 hover:bg-amber-500">Next →</button>
-      </div>
+      </Card>
     </div>
   );
 };

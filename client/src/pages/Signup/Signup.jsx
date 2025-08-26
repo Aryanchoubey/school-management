@@ -86,7 +86,7 @@ const PlanSelection = ({ nextStep, prevStep }) => {
   return (
     <div className="w-full max-w-3xl">
       <h2 className="text-2xl font-bold mb-6 text-center">Choose Your Plan</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-2  lg:grid-cols-2 gap-6">
         {plans.map((p, i) => (
           <Card
             key={i}
@@ -98,8 +98,8 @@ const PlanSelection = ({ nextStep, prevStep }) => {
         ))}
       </div>
 
-      <div className="flex justify-between mt-8">
-        <button onClick={prevStep} className="bg-gray-300 rounded-lg p-2 w-24 hover:bg-gray-400">← Back</button>
+      <div className="flex justify-between mt-8 lg:pb-3 pb-3 ">
+        <button onClick={prevStep} className="bg-gray-300 rounded-lg  p-2 w-24 hover:bg-gray-400">← Back</button>
         <button onClick={nextStep} className="bg-amber-400 rounded-lg p-2 w-24 hover:bg-amber-500">Next →</button>
       </div>
     </div>

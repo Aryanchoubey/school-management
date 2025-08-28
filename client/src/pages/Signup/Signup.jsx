@@ -1,224 +1,256 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, ArrowLeft, ArrowRight } from 'lucide-react';
-import { AccountInfo } from './components/AccountInfo';
-import { PlanSelection } from './components/PlanSections';
+"use client"
 
-const SignUp = () => {
-  const [step, setStep] = useState(1); // 1=Info, 2=Plan, 3=Payment, 4=Confirm
-  const [selectedPlan, setSelectedPlan] = useState(null);
-  const [paymentMethod, setPaymentMethod] = useState("");
+import { useState } from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { ArrowLeft, ArrowRight } from "lucide-react"
+import { Link } from "react-router-dom"
 
-  const nextStep = () => setStep((prev) => (prev < 4 ? prev + 1 : prev));
-  const prevStep = () => setStep((prev) => (prev > 1 ? prev - 1 : prev));
+export default function SignupFlow() {
+  const [step, setStep] = useState(1)
+  const [success, setSuccess] = useState(false)
+  const [selectedPlan, setSelectedPlan] = useState(null)
+  const [paymentMethod, setPaymentMethod] = useState("upi")
 
-  const steps = [
-    { id: 1, label: "Information", icon: "1" },
-    { id: 2, label: "Plans", icon: "2" },
-    { id: 3, label: "Payment", icon: "3" },
-    { id: 4, label: "Finish", icon: "✓" }
-  ];
+  const nextStep = () => setStep((prev) => Math.min(prev + 1, 4))
+  const prevStep = () => setStep((prev) => Math.max(prev - 1, 1))
+  const handleDone = () => setSuccess(true)
+
+  if (success) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-800 p-4">
+        <Card className="w-full max-w-md text-center p-8 shadow-lg rounded-2xl">
+          <h2 className="text-2xl font-bold text-green-600 mb-4">
+            🎉 Successfully Registered!
+          </h2>
+          <p className="text-gray-600">Thank you for signing up.</p>
+          <p className="mt-2 text-sm text-gray-500">
+            Selected Plan: <b>{selectedPlan || "None"}</b> <br />
+            Payment Method: <b>{paymentMethod}</b>
+          </p>
+          <Link to="/login">
+            <Button className="mt-4 bg-yellow-500 hover:bg-yellow-600">
+              Go to Login
+            </Button>
+          </Link>
+        </Card>
+      </div>
+    )
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-      <Card className="w-full max-w-6xl mx-auto shadow-2xl overflow-hidden">
-        <div className="flex flex-col lg:flex-row min-h-[700px]">
+    <div className="min-h-screen flex items-center justify-center bg-gray-500 p-4">
+      <Card className="w-full max-w-4xl shadow-lg rounded-2xl">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-center">
+            Setup your Account
+          </CardTitle>
 
-          {/* Left Side Image */}
-          <div className="lg:w-2/5 hidden lg:block relative">
-            <img
-              className="w-full h-full object-cover"
-              src="https://imgs.search.brave.com/tN6wno47SQgjxHPhOQ4A4J3OL0hjyrKdov5q7s4L9FA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAyMi8x/Mi8wMS8wNC80Mi9t/YW4tNzYyODMwNV82/NDAuanBn"
-              alt="Signup Illustration"
-            />
-            <div className="absolute inset-0 bg-black/20"></div>
-          </div>
-
-          {/* Right Side Form */}
-          <CardContent className="lg:w-3/5 flex flex-col p-6 lg:p-12">
-
-            {/* Progress Tracker */}
-            <div className="flex justify-center items-center gap-2 lg:gap-8 mb-8 lg:mb-12">
-              {steps.map((stepItem, index) => (
-                <div key={stepItem.id} className="flex items-center">
-                  {/* Circle + Label */}
-                  <div className="flex flex-col items-center">
-                    <div
-                      className={`h-10 w-10 lg:h-12 lg:w-12 flex items-center justify-center rounded-full border-2 font-semibold transition-all duration-300 ${step === stepItem.id
-                          ? "bg-amber-400 text-white border-amber-400 scale-110"
-                          : step > stepItem.id
-                            ? "bg-green-500 text-white border-green-500"
-                            : "border-gray-300 text-gray-400"
-                        }`}
-                    >
-                      {step > stepItem.id ? <CheckCircle2 className="h-5 w-5" /> : stepItem.icon}
-                    </div>
-                    <Label className="text-xs lg:text-sm mt-2 text-center font-medium">
-                      {stepItem.label}
-                    </Label>
-                  </div>
-
-                  {/* Connector */}
-                  {index < steps.length - 1 && (
-                    <div
-                      className={`h-0.5 w-8 lg:w-16 mx-2 transition-all duration-300 ${step > stepItem.id ? "bg-green-500" : "bg-gray-300"
-                        }`}
-                    />
-                  )}
+          {/* Steps Progress */}
+          <div className="flex justify-center gap-6 mt-4">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className={`flex flex-col items-center text-sm font-medium ${
+                  step === i ? "text-yellow-500" : "text-gray-500"
+                }`}
+              >
+                <div
+                  className={`flex items-center justify-center w-8 h-8 rounded-full border-2 ${
+                    step === i
+                      ? "bg-yellow-500 border-yellow-500 text-white"
+                      : "border-gray-400"
+                  }`}
+                >
+                  {i}
                 </div>
-              ))}
+              </div>
+            ))}
+          </div>
+        </CardHeader>
+
+        <CardContent className="p-6">
+          {/* STEP 1 - Personal Info */}
+          {step === 1 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Input placeholder="First Name" />
+              <Input placeholder="Last Name" />
+              <Input placeholder="Email Address" />
+              <Input placeholder="Phone Number" />
+              <Input placeholder="Password" type="password" />
             </div>
+          )}
 
+          {/* STEP 2 - Plans */}
+          {step === 2 && (
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              {["Free", "Basic", "Standard", "Premium"].map((plan) => {
+                const planDetails = {
+                  Free: [
+                    "✔ Up to 50 Students",
+                    "✔ 1 Teacher Account",
+                    "✔ Classes & Attendance",
+                    "✔ Basic Reports",
+                  ],
+                  Basic: [
+                    "✔ Up to 500 Students",
+                    "✔ 10 Teacher Accounts",
+                    "✔ Attendance & Timetable",
+                    "✔ Fee Collection & Invoices",
+                    "✔ Report Cards",
+                  ],
+                  Standard: [
+                    "✔ Up to 2000 Students",
+                    "✔ 50 Teacher Accounts",
+                    "✔ Attendance + Exams",
+                    "✔ Payment Gateway Integration",
+                    "✔ Parent Portal & Notifications",
+                    "✔ Performance Analytics",
+                  ],
+                  Premium: [
+                    "✔ Unlimited Students & Teachers",
+                    "✔ Multi-Branch Support",
+                    "✔ All Academic Features",
+                    "✔ Advanced Fee Management",
+                    "✔ Mobile App",
+                    "✔ AI Reports & Insights",
+                  ],
+                }
 
-            {/* Step Content Container */}
-            <div className="flex-1 flex justify-center items-center">
-              <div className="w-full max-w-2xl">
-                {step === 1 && (
-                  <AccountInfo nextStep={nextStep} />
+                const price = {
+                  Free: "₹0",
+                  Basic: "₹1999 /mo",
+                  Standard: "₹3999 /mo",
+                  Premium: "₹6999 /mo",
+                }
+
+                return (
+                  <Card
+                    key={plan}
+                    onClick={() =>
+                      setSelectedPlan((prev) => (prev === plan ? null : plan))
+                    }
+                    className={`p-4 flex flex-col items-center text-center rounded-xl border hover:shadow-md cursor-pointer ${
+                      selectedPlan === plan
+                        ? "border-yellow-500 bg-yellow-100"
+                        : "bg-gray-100"
+                    }`}
+                  >
+                    <h3 className="font-semibold text-lg">{plan}</h3>
+                    <ul className="mt-2 text-sm text-gray-700 space-y-1">
+                      {planDetails[plan].map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
+                    </ul>
+                    <p className="mt-4 font-bold text-lg">{price[plan]}</p>
+                  </Card>
+                )
+              })}
+            </div>
+          )}
+
+          {/* STEP 3 - Payment Method */}
+          {step === 3 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* LEFT - Choose Method */}
+              <div>
+                <Label className="mb-2 block">Choose Payment Method</Label>
+                <RadioGroup
+                  value={paymentMethod}
+                  onValueChange={setPaymentMethod}
+                >
+                  <div className="flex items-center space-x-2 mt-3 ">
+                    <RadioGroupItem value="netbanking" id="netbanking" />
+                    <Label htmlFor="netbanking">NetBanking</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="upi" id="upi" />
+                    <Label htmlFor="upi">UPI</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              {/* RIGHT - Dynamic Form */}
+              <div className="grid grid-cols-1 gap-3">
+                {paymentMethod === "netbanking" && (
+                  <>
+                    <Input placeholder="Account Holder Name" />
+                    <Input placeholder="Account Number" />
+                    <Input placeholder="IFSC Code" />
+                    <Input placeholder="CVV" />
+                  </>
                 )}
-                {step === 2 && (
-                  <PlanSelection
-                    nextStep={nextStep}
-                    prevStep={prevStep}
-                    selectedPlan={selectedPlan}
-                    setSelectedPlan={setSelectedPlan}
-                  />
-                )}
-                {step === 3 && (
-                  <PaymentMethod
-                    nextStep={nextStep}
-                    prevStep={prevStep}
-                    paymentMethod={paymentMethod}
-                    setPaymentMethod={setPaymentMethod}
-                  />
-                )}
-                {step === 4 && (
-                  <Confirmation prevStep={prevStep} />
+
+                {paymentMethod === "upi" && (
+                  <>
+                    <Input placeholder="UPI ID (example@okicici)" />
+                    <a
+                      href="upi://pay?pa=merchant@upi&pn=My%20School&am=1999&cu=INR&tn=Plan%20Payment"
+                      className="px-4 py-2 bg-yellow-500 text-white rounded-lg text-center"
+                    >
+                      GO TO UPI APPS
+                    </a>
+                  </>
                 )}
               </div>
             </div>
-          </CardContent>
-        </div>
-      </Card>
-    </div>
-  );
-};
+          )}
 
-// ---------------- Step 3 ----------------
-const PaymentMethod = ({ nextStep, prevStep, paymentMethod, setPaymentMethod }) => {
-  const paymentOptions = [
-    { id: "gpay", label: "Google Pay", icon: "🟢" },
-    { id: "paytm", label: "Paytm", icon: "🔵" },
-    { id: "visa", label: "VISA Card", icon: "💳" },
-  ];
-
-  return (
-    <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">
-          Choose Payment Method
-        </h2>
-        <p className="text-gray-600">
-          Select your preferred payment option
-        </p>
-      </div>
-
-      <Card className="p-6">
-        <RadioGroup
-          value={paymentMethod}
-          onValueChange={setPaymentMethod}
-          className="space-y-4"
-        >
-          {paymentOptions.map((option) => (
-            <div key={option.id} className="flex items-center space-x-3 p-4 rounded-lg border hover:bg-gray-50 transition-colors">
-              <RadioGroupItem value={option.id} id={option.id} />
-              <Label
-                htmlFor={option.id}
-                className="flex items-center space-x-3 cursor-pointer flex-1"
-              >
-                <span className="text-2xl">{option.icon}</span>
-                <span className="font-medium">{option.label}</span>
-              </Label>
+          {/* STEP 4 - Licence */}
+          {step === 4 && (
+            <div className="flex flex-col items-center gap-4">
+              <Input placeholder="Enter OTP Sent To Your Mobile Number  " />
+              <Button variant="outline">SUBMIT OTP</Button>
+              <p className="text-sm text-gray-500 text-center">
+                Check your mail and paste code. Don’t forget to check spam
+                folder.
+              </p>
             </div>
-          ))}
-        </RadioGroup>
-      </Card>
+          )}
+        </CardContent>
 
-      <div className="flex justify-between pt-6">
-        <Button
-          onClick={prevStep}
-          variant="outline"
-          className="px-8 h-12"
-          size="lg"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back
-        </Button>
-        <Button
-          onClick={nextStep}
-          disabled={!paymentMethod}
-          className="bg-amber-400 hover:bg-amber-500 text-black font-medium px-8 h-12"
-          size="lg"
-        >
-          Continue
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
-      </div>
-    </div>
-  );
-};
+        {/* Navigation */}
+        <div className="flex justify-between items-center p-6">
+          <Button
+            variant="outline"
+            onClick={prevStep}
+            disabled={step === 1}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft size={16} /> Back
+          </Button>
 
-// ---------------- Step 4 ----------------
-const Confirmation = ({ prevStep }) => {
-  return (
-    <div className="space-y-6 text-center">
-      <div className="mb-8">
-        <div className="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-          <CheckCircle2 className="h-10 w-10 text-green-600" />
-        </div>
-        <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">
-          Confirm Your Details
-        </h2>
-        <p className="text-gray-600 max-w-md mx-auto">
-          Please review your account details and payment information before completing your registration.
-        </p>
-      </div>
-
-      <Card className="p-6 text-left max-w-md mx-auto">
-        <h3 className="font-semibold mb-4">Registration Summary</h3>
-        <div className="space-y-2 text-sm text-gray-600">
-          <p><span className="font-medium">Organization:</span> Sample School</p>
-          <p><span className="font-medium">Plan:</span> Standard Plan</p>
-          <p><span className="font-medium">Amount:</span> ₹6,000/year</p>
-          <p><span className="font-medium">Payment:</span> Google Pay</p>
+          {step < 4 ? (
+            <Button
+              onClick={() => {
+                if (step === 2 && !selectedPlan) {
+                  alert("⚠ Please select a plan before proceeding")
+                  return
+                }
+                if (step === 3 && !paymentMethod) {
+                  alert("⚠ Please select a payment method before proceeding")
+                  return
+                }
+                nextStep()
+              }}
+              className="flex items-center gap-2"
+            >
+              Next <ArrowRight size={16} />
+            </Button>
+          ) : (
+            <Button
+              onClick={handleDone}
+              className="bg-yellow-500 hover:bg-yellow-600"
+            >
+              Done
+            </Button>
+          )}
         </div>
       </Card>
-
-      <div className="flex justify-center gap-4 pt-6">
-        <Button
-          onClick={prevStep}
-          variant="outline"
-          className="px-8 h-12"
-          size="lg"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back
-        </Button>
-        <Button
-          className="bg-green-500 hover:bg-green-600 text-white font-medium px-8 h-12"
-          size="lg"
-        >
-          Complete Registration
-          <CheckCircle2 className="ml-2 h-4 w-4" />
-        </Button>
-      </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;

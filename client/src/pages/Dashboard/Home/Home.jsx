@@ -3,13 +3,14 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, X, Bell } from "lucide-react"
+import { Menu, X, Bell, ChevronDown, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export default function Dashboard() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isDasboardOpen, setIsDasboardOpen] = useState(false)
 
   return (
     <div className="flex h-screen">
@@ -39,10 +40,47 @@ export default function Dashboard() {
 
         {isSidebarOpen && (
           <nav className="mt-4 space-y-4 px-4">
-            <Button variant="ghost" className="w-full justify-start">Dashboard</Button>
-            <Button variant="ghost" className="w-full justify-start">Add Branch</Button>
-            <Button variant="ghost" className="w-full justify-start">Classes</Button>
-            <Button variant="ghost" className="w-full justify-start">Sessions</Button>
+            <div>
+              <Button variant="ghost" className="w-full justify-start">
+                Go to super admin
+              </Button>
+              <Button variant="ghost" className="w-full justify-start">
+                My School
+              </Button>
+            </div>
+
+            {/* School Management Accordion */}
+            <div>
+              <Button
+                variant="ghost"
+                className="w-full bg-amber-400 justify-between"
+                onClick={() => setIsDasboardOpen(!isDasboardOpen)}
+              >
+                <span>School Management</span>
+                {isDasboardOpen ? (
+                  <ChevronDown className="h-4 w-4" />
+                ) : (
+                  <ChevronRight className="h-4 w-4" />
+                )}
+              </Button>
+
+              {isDasboardOpen && (
+                <div className="ml-4 mt-2 space-y-2">
+                  <Button variant="ghost" className="w-full justify-start">
+                    Dashboard
+                  </Button>
+                  <Button variant="ghost" className="w-full bg-amber-400  justify-start">
+                    Add Branch
+                  </Button>
+                  <Button variant="ghost" className="w-fulljustify-start">
+                    Classes
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start">
+                    Sessions
+                  </Button>
+                </div>
+              )}
+            </div>
           </nav>
         )}
       </aside>
@@ -50,17 +88,18 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Navbar */}
-        <header className="flex items-center justify-between bg-white shadow px-4 py-3">
+        <header className=" min-h-16 flex items-center justify-between bg-white shadow px-4 py-3">
           <div className="flex items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="cursor-pointer"
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            >
-              <Menu className="h-6 w-6" />
-            </Button>
-            <h1 className="font-semibold text-lg">Delhi Public School</h1>
+            {!isSidebarOpen && (
+          <Button
+            variant="ghost"
+            className="cursor-pointer"
+            onClick={() => setIsSidebarOpen(true)}
+          >
+            <Menu />
+          </Button>
+        )}
+            <h1 className="font-semibold text-lg"> Public School</h1>
           </div>
           <div className="flex items-center space-x-4">
             {/* Notification */}
@@ -85,6 +124,7 @@ export default function Dashboard() {
             <Button className="cursor-pointer">Buy Now</Button>
           </div>
         </header>
+        <hr className="border-2" />
 
         {/* Form Content */}
         <main className="flex-1 p-6 overflow-y-auto bg-gray-50">

@@ -65,14 +65,14 @@ export default function Dashboard() {
               </Button>
 
               {isDasboardOpen && (
-                <div className="ml-4 mt-2 space-y-2">
+                <div className="ml-4 mt-2 bg-amber-400 space-y-2 rounded-2xl ">
                   <Button variant="ghost" className="w-full justify-start">
                     Dashboard
                   </Button>
-                  <Button variant="ghost" className="w-full bg-amber-400  justify-start">
+                  <Button variant="ghost" className="w-full hover:bg-blue-950  justify-start">
                     Add Branch
                   </Button>
-                  <Button variant="ghost" className="w-fulljustify-start">
+                  <Button variant="ghost" className="w-full justify-start">
                     Classes
                   </Button>
                   <Button variant="ghost" className="w-full justify-start">
@@ -80,8 +80,15 @@ export default function Dashboard() {
                   </Button>
                 </div>
               )}
+              
             </div>
+             <div>
+              <Button variant="ghost" className="w-full justify-start">
+                Academics
+              </Button>
+               </div>
           </nav>
+          
         )}
       </aside>
 

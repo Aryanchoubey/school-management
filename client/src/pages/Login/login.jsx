@@ -1,16 +1,16 @@
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const navigate = useNavigate()
-
-  const navigateToSignup = () => {
-    navigate('/signup')
-  }
+  const navigateToSignup = () => navigate("/signup");
+  const navigateToHome = () => navigate("/home"); // ✅ link to Home
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
@@ -18,10 +18,10 @@ const Login = () => {
         <div className="flex flex-col lg:flex-row min-h-[600px]">
           {/* Left side - Image */}
           <div className="lg:w-1/2 hidden lg:block relative">
-            <img 
-              className="w-full h-full object-cover" 
-              src="https://imgs.search.brave.com/tN6wno47SQgjxHPhOQ4A4J3OL0hjyrKdov5q7s4L9FA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAyMi8x/Mi8wMS8wNC80Mi9t/YW4tNzYyODMwNV82/NDAuanBn" 
-              alt="Login illustration" 
+            <img
+              className="w-full h-full object-cover"
+              src="https://imgs.search.brave.com/tN6wno47SQgjxHPhOQ4A4J3OL0hjyrKdov5q7s4L9FA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAyMi8x/Mi8wMS8wNC80Mi9t/YW4tNzYyODMwNV82/NDAuanBn"
+              alt="Login illustration"
             />
             <div className="absolute inset-0 bg-black/20"></div>
           </div>
@@ -30,15 +30,15 @@ const Login = () => {
           <CardContent className="lg:w-1/2 p-2 lg:p-8 flex flex-col justify-center">
             {/* Toggle Buttons */}
             <div className="flex gap-2 mb-8">
-              <Button 
+              <Button
                 className="flex-1 bg-amber-400 hover:bg-amber-500 text-black font-medium rounded-full h-12"
                 size="lg"
               >
                 Login
               </Button>
-              <Button 
+              <Button
                 onClick={navigateToSignup}
-                variant="secondary" 
+                variant="secondary"
                 className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full h-12"
                 size="lg"
               >
@@ -51,40 +51,33 @@ const Login = () => {
               <h1 className="text-3xl lg:text-4xl font-semibold text-gray-900 mb-3">
                 Welcome
               </h1>
-              <p className="text-gray-600 text-base">
-                Please login to your account
-              </p>
+              <p className="text-gray-600 text-base">Please login to your account</p>
             </div>
 
             {/* Form Inputs */}
             <div className="space-y-6 mb-8">
-              <div className="space-y-2">
-                <Input
-                  type="email"
-                  placeholder="Email or username"
-                  className="h-12 text-base border-0 border-b-2 border-gray-200 rounded-none bg-transparent focus:border-amber-400 focus:ring-0 px-0"
-                />
-              </div>
-              <div className="space-y-2">
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  className="h-12 text-base border-0 border-b-2 border-gray-200 rounded-none bg-transparent focus:border-amber-400 focus:ring-0 px-0"
-                />
-              </div>
+              <Input
+                type="email"
+                placeholder="Email or username"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="h-12 text-base border-0 border-b-2 border-gray-200 rounded-none bg-transparent focus:border-amber-400 focus:ring-0 px-0"
+              />
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="h-12 text-base border-0 border-b-2 border-gray-200 rounded-none bg-transparent focus:border-amber-400 focus:ring-0 px-0"
+              />
             </div>
 
             {/* Forgot Password and Submit */}
             <div className="flex justify-between items-center mb-8">
-              <Button 
-                variant="link"
-                className=" text-gray-600 pl-0  underline"
-              >
+              <Button variant="link" className="text-gray-600 pl-0 underline">
                 Forgot Password?
               </Button>
-              <Button 
-                size="lg"
-              >
+              <Button onClick={navigateToHome} size="lg">
                 Login
               </Button>
             </div>

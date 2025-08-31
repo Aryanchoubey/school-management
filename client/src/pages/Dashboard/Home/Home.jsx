@@ -1,7 +1,3 @@
-
-
-"use client"
-
 import { useState } from "react"
 import { Menu, X, Bell, ChevronDown, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -10,127 +6,15 @@ import { Label } from "@/components/ui/label"
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [isDasboardOpen, setIsDasboardOpen] = useState(false)
 
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
-      <aside
-        className={`fixed lg:static top-0 left-0 h-full bg-[#0f1a3c] text-white transition-all duration-300 z-50 ${
-          isSidebarOpen ? "w-64" : "w-0 lg:w-"
-        }`}
-      >
-        <div className="flex justify-between items-center p-4">
-          {isSidebarOpen && (
-            <span className="font-semibold">Aryan Choubey</span>
-            
-          )}
-          {isSidebarOpen && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white cursor-pointer"
-              onClick={() => setIsSidebarOpen(false)}
-            >
-              <X className="h-6 w-6" />
-            </Button>
-          )}
-        </div>
-        <hr />
 
-        {isSidebarOpen && (
-          <nav className="mt-4 space-y-4 px-4">
-            <div>
-              <Button variant="ghost" className="w-full justify-start">
-                Go to super admin
-              </Button>
-              <Button variant="ghost" className="w-full justify-start">
-                My School
-              </Button>
-            </div>
-
-            {/* School Management Accordion */}
-            <div>
-              <Button
-                variant="ghost"
-                className="w-full bg-amber-400 justify-between"
-                onClick={() => setIsDasboardOpen(!isDasboardOpen)}
-              >
-                <span>School Management</span>
-                {isDasboardOpen ? (
-                  <ChevronDown className="h-4 w-4" />
-                ) : (
-                  <ChevronRight className="h-4 w-4" />
-                )}
-              </Button>
-
-              {isDasboardOpen && (
-                <div className="ml-4 mt-2 bg-amber-400 space-y-2 rounded-2xl ">
-                  <Button variant="ghost" className="w-full justify-start">
-                    Dashboard
-                  </Button>
-                  <Button variant="ghost" className="w-full hover:bg-blue-950  justify-start">
-                    Add Branch
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start">
-                    Classes
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start">
-                    Sessions
-                  </Button>
-                </div>
-              )}
-              
-            </div>
-             <div>
-              <Button variant="ghost" className="w-full justify-start">
-                Academics
-              </Button>
-               </div>
-          </nav>
-          
-        )}
-      </aside>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Navbar */}
-        <header className=" min-h-16 flex items-center justify-between bg-white shadow px-4 py-3">
-          <div className="flex items-center space-x-2">
-            {!isSidebarOpen && (
-          <Button
-            variant="ghost"
-            className="cursor-pointer"
-            onClick={() => setIsSidebarOpen(true)}
-          >
-            <Menu />
-          </Button>
-        )}
-            <h1 className="font-semibold text-lg"> Public School</h1>
-          </div>
-          <div className="flex items-center space-x-4">
-            {/* Notification */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="cursor-pointer"
-            >
-              <Bell className="h-6 w-6" />
-            </Button>
 
-            {/* Username only in desktop */}
-            <span className="hidden lg:inline text-gray-700 font-medium">
-              Aryan Choubey
-            </span>
-
-            {/* Free Trial - hide in small screens */}
-            <span className="hidden lg:inline text-sm text-gray-500">
-              Free Trial - 30 Days
-            </span>
-
-            <Button className="cursor-pointer">Buy Now</Button>
-          </div>
-        </header>
         <hr className="border-2" />
 
         {/* Form Content */}

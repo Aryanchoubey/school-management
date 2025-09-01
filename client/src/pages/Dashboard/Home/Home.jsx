@@ -3,6 +3,7 @@ import { Menu, X, Bell, ChevronDown, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import Myschool from "../MySchool/Myschool"
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)

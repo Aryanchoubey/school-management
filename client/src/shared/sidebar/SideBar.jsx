@@ -2,8 +2,14 @@ import { Button } from "@/components/ui/button"
 import { Bell, ChevronDown, ChevronRight, X } from "lucide-react"
 import { Overlay } from "../Overlay/Overlay"
 import { useIsMobile } from "@/hooks/use-mobile"
+import { useNavigate } from "react-router-dom"
+// import Myschool from "@/pages/Dashboard/MySchool/Myschool"
 
 export const SideBar = ({ isSidebarOpen, setIsSidebarOpen, isDasboardOpen, setIsDasboardOpen }) => {
+  const navigate = useNavigate()
+  const handleNavigation =(path) =>{
+    navigate(path)
+  }
   return (
     <>
       <aside
@@ -29,12 +35,12 @@ export const SideBar = ({ isSidebarOpen, setIsSidebarOpen, isDasboardOpen, setIs
         <hr />
 
         {isSidebarOpen && (
-          <nav className="mt-4 space-y-4 px-4">
-            <div>
+          <nav className="mt-4 space-y-4 px-4  ">
+            <div className="space-y-3">
               <Button variant="ghost" className="w-full justify-start">
                 Go to super admin
               </Button>
-              <Button variant="ghost" className="w-full justify-start">
+              <Button onClick={()=>handleNavigation('school')} variant="ghost" className="w-full justify-start">
                 My School
               </Button>
             </div>
@@ -59,7 +65,7 @@ export const SideBar = ({ isSidebarOpen, setIsSidebarOpen, isDasboardOpen, setIs
                   <Button variant="ghost" className="w-full justify-start">
                     Dashboard
                   </Button>
-                  <Button variant="ghost" className="w-full bg-blue-950  justify-start">
+                  <Button onClick={()=>handleNavigation('branch')} variant="ghost" className="w-full  justify-start">
                     Add Branch
                   </Button>
                   <Button variant="ghost" className="w-full justify-start">
@@ -68,14 +74,30 @@ export const SideBar = ({ isSidebarOpen, setIsSidebarOpen, isDasboardOpen, setIs
                   <Button variant="ghost" className="w-full justify-start">
                     Sessions
                   </Button>
+                  
                 </div>
               )}
 
             </div>
-            <div>
+            <div className="space-y-5 ">
               <Button variant="ghost" className="w-full justify-start">
                 Academics
               </Button>
+              <Button variant="ghost" className="w-full justify-start">
+                    User Management
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start">
+                    Organisation
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start">
+                    Setting
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start">
+                    Biling
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start">
+                    Profile
+                  </Button>
             </div>
           </nav>
         )}

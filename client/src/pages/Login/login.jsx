@@ -10,10 +10,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const navigateToSignup = () => navigate("/signup");
-  const navigateToHome = () => navigate("/home"); // ✅ link to Home
+  const navigateToHome = () => navigate("/dashboard");
+   // ✅ link to Home
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      
       <Card className="w-full max-w-6xl mx-auto shadow-2xl overflow-hidden">
         <div className="flex flex-col lg:flex-row min-h-[600px]">
           {/* Left side - Image */}

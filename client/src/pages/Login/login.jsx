@@ -15,6 +15,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      
       <Card className="w-full max-w-6xl mx-auto shadow-2xl overflow-hidden">
         <div className="flex flex-col lg:flex-row min-h-[600px]">
           {/* Left side - Image */}

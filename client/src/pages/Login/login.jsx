@@ -10,7 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const navigateToSignup = () => navigate("/signup");
-  const navigateToHome = () => navigate("/home"); // ✅ link to Home
+  const navigateToHome = () => navigate("/dashboard"); // ✅ link to Home
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">

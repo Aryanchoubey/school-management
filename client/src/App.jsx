@@ -5,7 +5,8 @@ import SignUp from './pages/Signup/Signup'
 import Home from './pages/Dashboard/Home/Home'
 import { HomeLayout } from './pages/_layout/HomeLayout'
 import Myschool from './pages/Dashboard/MySchool/Myschool'
-import AddStudent from './pages/Dashboard/AddStudent/AddStudent'
+import AddStudent from './pages/Dashboard/MySchool/AddStudent'
+// import AddStudent from './pages/Dashboard/AddStudent/AddStudent'
 
 
 function App() {

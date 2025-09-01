@@ -6,9 +6,14 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useNavigate } from "react-router-dom"
 
 export default function AddStudent() {
   const [gender, setGender] = useState("male")
+  const navigate = useNavigate()
+  const studentnavigation = (path) => {
+navigate(path)
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -27,7 +32,10 @@ export default function AddStudent() {
                   alt="profile"
                   className="w-28 h-28 rounded-full object-cover"
                 />
-                <Button variant="outline" className="mt-3">Choose Media</Button>
+                 <div className="col-span-2 flex flex-col gap-2">
+              <Label>Upload Photo</Label>
+              <Input type="file" />
+            </div>
               </div>
 
               {/* Form Section */}
@@ -140,7 +148,7 @@ export default function AddStudent() {
 
             {/* Save Button */}
             <div className="flex justify-end mt-6">
-              <Button className="bg-yellow-400 hover:bg-yellow-500 text-black px-6">
+              <Button  onClick={() => studentnavigation ('/dashboard/school')} className="bg-yellow-400 hover:bg-yellow-500 text-black px-6">
                 Save
               </Button>
             </div>

@@ -22,6 +22,7 @@ export default function Signup() {
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1))
   const handleDone = () => setSuccess(true)
 
+
   if (success) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-800 p-4">

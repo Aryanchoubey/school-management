@@ -1,0 +1,161 @@
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Calendar } from "lucide-react"
+import { useNavigate } from "react-router-dom"
+
+export default function UserManagement() {
+  const [open, setOpen] = useState(true)
+  const navigate = useNavigate()
+
+  const adduser = (path) => {
+    navigate(path)
+    setOpen(false)
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent
+        className="w-full sm:max-w-lg md:max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg"
+      >
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold">Edit Student</DialogTitle>
+          <DialogDescription />
+        </DialogHeader>
+
+        {/* Form */}
+        <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* First Name */}
+          <div>
+            <Label htmlFor="firstName">First Name</Label>
+            <Input id="firstName" placeholder="First Name" />
+          </div>
+
+          {/* Last Name */}
+          <div>
+            <Label htmlFor="lastName">Last Name</Label>
+            <Input id="lastName" placeholder="Last Name" />
+          </div>
+
+          {/* Email */}
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" type="email" placeholder="Email" />
+          </div>
+
+          {/* Gender */}
+          <div>
+            <Label htmlFor="gender">Gender</Label>
+            <Select>
+              <SelectTrigger id="gender">
+                <SelectValue placeholder="Select gender" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="male">Male</SelectItem>
+                <SelectItem value="female">Female</SelectItem>
+                <SelectItem value="other">Other</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Father Name */}
+          <div>
+            <Label htmlFor="fatherName">Father's Name</Label>
+            <Input id="fatherName" placeholder="Father's Name" />
+          </div>
+
+          {/* Mother Name */}
+          <div>
+            <Label htmlFor="motherName">Mother's Name</Label>
+            <Input id="motherName" placeholder="Mother's Name" />
+          </div>
+
+          {/* Date of Birth */}
+          <div className="flex flex-col">
+            <Label htmlFor="dob">Date Of Birth</Label>
+            <div className="relative">
+              <Input id="dob" type="date" />
+              <calendar className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
+            </div>
+          </div>
+
+          {/* User Type */}
+          <div>
+            <Label htmlFor="userType">User Type</Label>
+            <Select>
+              <SelectTrigger id="userType">
+                <SelectValue placeholder="Select user type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="student">Student</SelectItem>
+                <SelectItem value="teacher">Teacher</SelectItem>
+                <SelectItem value="admin">Admin</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Joining Date */}
+          <div className="flex flex-col">
+            <Label htmlFor="joinDate">Joining Date</Label>
+            <div className="relative">
+              <Input id="joinDate" type="date" />
+              <calendar className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
+            </div>
+          </div>
+
+          {/* Department */}
+          <div>
+            <Label htmlFor="department">Department</Label>
+            <Input id="department" placeholder="Department" />
+          </div>
+
+          {/* Permanent Address */}
+          <div className="col-span-1 md:col-span-2">
+            <Label htmlFor="permanentAddress">Permanent Address</Label>
+            <Textarea id="permanentAddress" placeholder="Permanent Address" />
+          </div>
+
+          {/* Phone Number */}
+          <div>
+            <Label htmlFor="phone">Phone Number</Label>
+            <Input id="phone" type="tel" placeholder="Phone Number" />
+          </div>
+
+          {/* Correspondence Address */}
+          <div className="col-span-1 md:col-span-2">
+            <Label htmlFor="correspondence">Correspondence Address</Label>
+            <Textarea id="correspondence" placeholder="Correspondence Address" />
+          </div>
+
+          {/* Same as Permanent */}
+          <div className="col-span-1 md:col-span-2 flex items-center space-x-2">
+            <input type="checkbox" id="sameAddress" className="h-4 w-4" />
+            <Label htmlFor="sameAddress">Same As Permanent Address</Label>
+          </div>
+
+          {/* Buttons */}
+          <div className="col-span-1 md:col-span-2 flex flex-col md:flex-row justify-end gap-3 mt-4">
+            <Button
+              type="reset"
+              variant="outline"
+              className="w-full md:w-auto border-yellow-500 text-yellow-500 hover:bg-yellow-50"
+            >
+              Reset
+            </Button>
+            <Button
+              type="button"
+              onClick={() => adduser("/dashboard")}
+              className="w-full md:w-auto bg-yellow-500 hover:bg-yellow-600 text-white"
+            >
+              Save
+            </Button>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
+  )
+}

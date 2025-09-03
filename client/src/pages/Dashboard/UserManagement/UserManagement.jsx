@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Calendar } from "lucide-react"
 import { useNavigate } from "react-router-dom"
+import { X } from "lucide-react"
 
 export default function UserManagement() {
   const [open, setOpen] = useState(true)
@@ -18,12 +19,20 @@ export default function UserManagement() {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog  open={open}
+  onOpenChange={(isOpen) => {
+    setOpen(isOpen)
+    if (!isOpen) {
+      // User clicked outside the dialog (overlay) → go back to dashboard
+      navigate("/dashboard")
+    }
+  }}>
       <DialogContent
-        className="w-full sm:max-w-lg md:max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg"
+        className="max-w-full sm:max-w-lg md:max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg"
       >
-        <DialogHeader>
+        <DialogHeader className=" ">
           <DialogTitle className="text-2xl font-bold">Edit Student</DialogTitle>
+          
           <DialogDescription />
         </DialogHeader>
 

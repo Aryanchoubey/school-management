@@ -19,20 +19,21 @@ export default function UserManagement() {
   }
 
   return (
-    <Dialog  open={open}
-  onOpenChange={(isOpen) => {
-    setOpen(isOpen)
-    if (!isOpen) {
-      // User clicked outside the dialog (overlay) → go back to dashboard
-      navigate("/dashboard")
-    }
-  }}>
+    <Dialog
+      open={open}
+      onOpenChange={(isOpen) => {
+        setOpen(isOpen)
+        if (!isOpen) {
+          // User clicked outside the dialog (overlay) → go back to dashboard
+          navigate("/dashboard")
+        }
+      }}
+    >
       <DialogContent
-        className="max-w-full sm:max-w-lg md:max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg"
+        className="w-[95vw] sm:max-w-2xl md:max-w-6xl lg:max-w-7xl h-[85vh] overflow-y-auto rounded-xl border-2 border-gray-300 shadow-2xl"
       >
-        <DialogHeader className=" ">
+        <DialogHeader>
           <DialogTitle className="text-2xl font-bold">Edit Student</DialogTitle>
-          
           <DialogDescription />
         </DialogHeader>
 
@@ -88,7 +89,7 @@ export default function UserManagement() {
             <Label htmlFor="dob">Date Of Birth</Label>
             <div className="relative">
               <Input id="dob" type="date" />
-              <calendar className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Calendar className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
             </div>
           </div>
 
@@ -112,7 +113,7 @@ export default function UserManagement() {
             <Label htmlFor="joinDate">Joining Date</Label>
             <div className="relative">
               <Input id="joinDate" type="date" />
-              <calendar className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Calendar className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
             </div>
           </div>
 
@@ -147,18 +148,18 @@ export default function UserManagement() {
           </div>
 
           {/* Buttons */}
-          <div className="col-span-1 md:col-span-2 flex flex-col md:flex-row justify-end gap-3 mt-4">
+          <div className="col-span-1 w-[50vw]  md:col-span-2 flex flex-col md:flex-row gap-3 mt-4">
             <Button
               type="reset"
               variant="outline"
-              className="w-full md:w-auto border-yellow-500 text-yellow-500 hover:bg-yellow-50"
+              className=" w-[30vw] rounded-3xl md:w-auto border-yellow-500 text-yellow-500 hover:bg-yellow-50 font-bold px-6 py-3"
             >
               Reset
             </Button>
             <Button
               type="button"
               onClick={() => adduser("/dashboard")}
-              className="w-full md:w-auto bg-yellow-500 hover:bg-yellow-600 text-white"
+              className="w-[120px] rounded-3xl md:w-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold px-6 py-3"
             >
               Save
             </Button>

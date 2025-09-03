@@ -38,11 +38,7 @@ const Academics = () => {
         <CardTitle className="flex items-center gap-2 text-gray-800 text-base sm:text-lg font-semibold">
           <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600 flex-shrink-0" />
           <span className="truncate">{title}</span>
-          {isPro && (
-            <Badge className="ml-auto text-xs flex-shrink-0 bg-blue-100 text-blue-800 hover:bg-blue-100">
-              Go Pro
-            </Badge>
-          )}
+         
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-0">

@@ -6,6 +6,8 @@ import Home from './pages/Dashboard/Home/Home'
 import { HomeLayout } from './pages/_layout/HomeLayout'
 import Myschool from './pages/Dashboard/MySchool/Myschool'
 import AddStudent from './pages/Dashboard/MySchool/AddStudent'
+import UserManagement from './pages/Dashboard/UserManagement/UserManagement'
+import Academics from './pages/Dashboard/Academics/Academics'
 // import AddStudent from './pages/Dashboard/AddStudent/AddStudent'
 
 
@@ -22,6 +24,8 @@ function App() {
           <Route path='school' element={<Myschool />} />
           <Route path='branch' element={<Home/>} />
           <Route path='addstudent' element={<AddStudent />} />
+          <Route path='editstudent' element={<UserManagement />} />
+          <Route path='academics' element={<Academics />} />
         </Route>
 
         {/* Root route */}

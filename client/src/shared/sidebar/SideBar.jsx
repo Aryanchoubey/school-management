@@ -4,7 +4,14 @@ import { Overlay } from "../Overlay/Overlay"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { useNavigate, useLocation } from "react-router-dom"
 
-export const SideBar = ({ isSidebarOpen, setIsSidebarOpen, isDasboardOpen, setIsDasboardOpen }) => {
+export const SideBar = ({
+  isSidebarOpen,
+  setIsSidebarOpen,
+  isDasboardOpen,
+  setIsDasboardOpen,
+   isAcademicsOpen={isAcademicsOpen}   ,     // 👈 pass value
+        setIsAcademicsOpen={setIsAcademicsOpen} 
+}) => {
   const navigate = useNavigate()
   const location = useLocation()
   const isMobile = useIsMobile()
@@ -19,10 +26,11 @@ export const SideBar = ({ isSidebarOpen, setIsSidebarOpen, isDasboardOpen, setIs
   return (
     <>
       <aside
-        className={`fixed lg:static top-0 left-0 h-full bg-[#0f1a3c] text-white transition-all duration-300 z-50 ${
-          isSidebarOpen ? "w-64" : "w-0 lg:w-"
+        className={`fixed lg:static top-0 left-0 h-full bg-[#0f1a3c] text-white transition-all overflow-y-auto duration-300 z-50 ${
+          isSidebarOpen ? "w-64" : "w-0 lg:w-0"
         }`}
       >
+        {/* Header */}
         <div className="flex justify-between items-center p-4">
           {isSidebarOpen && <span className="font-semibold">Aryan Choubey</span>}
           {isSidebarOpen && (
@@ -40,6 +48,7 @@ export const SideBar = ({ isSidebarOpen, setIsSidebarOpen, isDasboardOpen, setIs
 
         {isSidebarOpen && (
           <nav className="mt-4 space-y-4 px-4">
+            {/* Super Admin + My School */}
             <div className="space-y-3">
               <Button
                 variant="ghost"
@@ -87,7 +96,6 @@ export const SideBar = ({ isSidebarOpen, setIsSidebarOpen, isDasboardOpen, setIs
                     Dashboard
                   </Button>
 
-                  {/* ✅ Add Branch with blue active color */}
                   <Button
                     onClick={() => handleNavigation("branch")}
                     variant="ghost"
@@ -118,57 +126,130 @@ export const SideBar = ({ isSidebarOpen, setIsSidebarOpen, isDasboardOpen, setIs
               )}
             </div>
 
-            <div className="space-y-5">
+            {/* Academics Accordion */}
+            <div>
               <Button
-                onClick={() => handleNavigation("academics")}
                 variant="ghost"
-                className="w-full justify-start"
+                className="w-full justify-between hover:text-white hover:bg-primary"
+                onClick={() => setIsAcademicsOpen(!isAcademicsOpen)}
               >
-                Academics
+                <span>Academics</span>
+                {isAcademicsOpen ? (
+                  <ChevronDown className="h-4 w-4" />
+                ) : (
+                  <ChevronRight className="h-4 w-4" />
+                )}
               </Button>
 
-              {/* ✅ FIXED User Management Button */}
-              <Button
-                onClick={() => handleNavigation("editstudent")}
-                variant="ghost"
-                className={`w-full justify-start ${
-                  location.pathname.includes("editstudent")
-                    ? "bg-primary text-white"
-                    : "hover:bg-primary hover:text-white"
-                }`}
-              >
-                User Management
-              </Button>
+              {isAcademicsOpen && (
+                <div className="ml-4 mt-2 bg-amber-400 space-y-2 rounded-2xl overflow-hidden">
+                  <Button
+                    onClick={() => handleNavigation("class")}
+                    variant="ghost"
+                    className="w-full justify-start"
+                  >
+                    Class
+                  </Button>
 
-              <Button
-                onClick={() => handleNavigation("organisation")}
-                variant="ghost"
-                className="w-full justify-start"
-              >
-                Organisation
-              </Button>
-              <Button
-                onClick={() => handleNavigation("settings")}
-                variant="ghost"
-                className="w-full justify-start"
-              >
-                Setting
-              </Button>
-              <Button
-                onClick={() => handleNavigation("billing")}
-                variant="ghost"
-                className="w-full justify-start"
-              >
-                Billing
-              </Button>
-              <Button
-                onClick={() => handleNavigation("profile")}
-                variant="ghost"
-                className="w-full justify-start"
-              >
-                Profile
-              </Button>
+                  <Button
+                    onClick={() => handleNavigation("section")}
+                    variant="ghost"
+                    className={`w-full justify-start ${
+                      location.pathname.includes("section")
+                        ? "bg-blue-500 text-white"
+                        : "hover:bg-blue-500 hover:text-white"
+                    }`}
+                  >
+                    Section
+                  </Button>
+
+                  <Button
+                    onClick={() => handleNavigation("subjects")}
+                    variant="ghost"
+                    className="w-full justify-start"
+                  >
+                    Subjects
+                  </Button>
+                  <Button
+                    onClick={() => handleNavigation("timetable")}
+                    variant="ghost"
+                    className="w-full justify-start"
+                  >
+                    Time Table
+                  </Button>
+                  <Button
+                    onClick={() => handleNavigation("attendance")}
+                    variant="ghost"
+                    className="w-full justify-start"
+                  >
+                    Attendance
+                  </Button>
+                  <Button
+                    onClick={() => handleNavigation("studentleave")}
+                    variant="ghost"
+                    className="w-full justify-start"
+                  >
+                    Student Leave
+                  </Button>
+                  <Button
+                    onClick={() => handleNavigation("homework")}
+                    variant="ghost"
+                    className="w-full justify-start"
+                  >
+                    Home Work
+                  </Button>
+                  <Button
+                    onClick={() => handleNavigation("noticeboard")}
+                    variant="ghost"
+                    className="w-full justify-start"
+                  >
+                    Notice Board
+                  </Button>
+                </div>
+              )}
             </div>
+
+            {/* Fixed Buttons */}
+            <Button
+              onClick={() => handleNavigation("editstudent")}
+              variant="ghost"
+              className={`w-full justify-start ${
+                location.pathname.includes("editstudent")
+                  ? "bg-primary text-white"
+                  : "hover:bg-primary hover:text-white"
+              }`}
+            >
+              User Management
+            </Button>
+
+            <Button
+              onClick={() => handleNavigation("organisation")}
+              variant="ghost"
+              className="w-full justify-start"
+            >
+              Organisation
+            </Button>
+            <Button
+              onClick={() => handleNavigation("settings")}
+              variant="ghost"
+              className="w-full justify-start"
+            >
+              Setting
+            </Button>
+            <Button
+              onClick={() => handleNavigation("billing")}
+              variant="ghost"
+              className="w-full justify-start"
+            >
+              Billing
+            </Button>
+            <Button
+              onClick={() => handleNavigation("profile")}
+              variant="ghost"
+              className="w-full justify-start"
+            >
+              Profile
+            </Button>
           </nav>
         )}
       </aside>

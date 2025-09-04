@@ -6,6 +6,7 @@ import { Outlet } from "react-router-dom"
 export const HomeLayout = () => {
   const [isDasboardOpen, setIsDasboardOpen] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isAcademicsOpen, setIsAcademicsOpen] = useState(false)
 
   return (
     <div className="flex flex-col min-h-screen w-full">
@@ -24,6 +25,8 @@ export const HomeLayout = () => {
             setIsDasboardOpen={setIsDasboardOpen}
             isSidebarOpen={isSidebarOpen}
             setIsSidebarOpen={setIsSidebarOpen}
+            isAcademicsOpen={isAcademicsOpen}
+            setIsAcademicsOpen={setIsAcademicsOpen}
           />
         </aside>
 

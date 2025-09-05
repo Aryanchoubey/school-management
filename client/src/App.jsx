@@ -15,6 +15,7 @@ import Enquiry from './pages/Dashboard/Home/Enquiry'
 import ClassesPage from './pages/Dashboard/Home/Classes'
 import Classes from './pages/Dashboard/Home/Classes'
 import Attendance from './pages/Dashboard/Academics/Attendence'
+import Settings from './pages/Dashboard/Settings/Settings'
 // import AddStudent from './pages/Dashboard/AddStudent/AddStudent'
 
 
@@ -40,6 +41,7 @@ function App() {
           <Route path='studentleave' element={<StudentLeave />} />
           <Route path='noticeboard' element={<NoticeBoard />} />
           <Route path='attendence' element={<Attendance/>} />
+          <Route path='settings' element={<Settings/>} />
         </Route>
 
         {/* Root route */}

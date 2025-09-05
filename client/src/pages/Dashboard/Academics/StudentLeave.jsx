@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Eye, FileText, Plus } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
+import { DialogDescription } from "@radix-ui/react-dialog"
 
 const studentLeaves = [
   {
@@ -136,6 +137,7 @@ export default function StudentLeave() {
         <DialogContent className="min-w-[90vw] h-[90vh] md:w-[80vw] md:h-[85vh] rounded-2xl flex flex-col">
           <DialogHeader>
             <DialogTitle className="text-xl font-bold pl-4 ">Add New Leave</DialogTitle>
+            <DialogDescription></DialogDescription>
           </DialogHeader>
 
           {/* Scrollable content area */}
@@ -196,8 +198,8 @@ export default function StudentLeave() {
                 </div>
 
                 <div className="flex flex-col gap-5">
-                  <Input type="date" className="w-[35vw] h-[50px]" />
-                  <Input type="date" className="w-[35vw] h-[50px]" />
+                  <Input type="date" className="lg:w-[35vw] lg:h-[50px]" />
+                  <Input type="date" className="lg:w-[35vw] lg:h-[50px]" />
                 </div>
 
                 

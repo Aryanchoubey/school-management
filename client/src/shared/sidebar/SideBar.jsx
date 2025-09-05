@@ -101,8 +101,8 @@ export const SideBar = ({
                     variant="ghost"
                     className={`w-full justify-start ${
                       location.pathname.includes("branch")
-                        ? "bg-blue-500 text-white"
-                        : "hover:bg-blue-500 hover:text-white"
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
                     }`}
                   >
                     Add Branch

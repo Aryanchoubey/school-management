@@ -89,7 +89,7 @@ export default function UserManagement() {
             <Label htmlFor="dob">Date Of Birth</Label>
             <div className="relative">
               <Input id="dob" type="date" />
-              <Calendar className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
+              {/* <Calendar className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" /> */}
             </div>
           </div>
 
@@ -113,7 +113,7 @@ export default function UserManagement() {
             <Label htmlFor="joinDate">Joining Date</Label>
             <div className="relative">
               <Input id="joinDate" type="date" />
-              <Calendar className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
+              {/* <Calendar className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" /> */}
             </div>
           </div>
 

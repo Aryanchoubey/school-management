@@ -9,6 +9,7 @@ import AddStudent from './pages/Dashboard/MySchool/AddStudent'
 import UserManagement from './pages/Dashboard/UserManagement/UserManagement'
 import Academics from './pages/Dashboard/Academics/Academics'
 import StudentLeave from './pages/Dashboard/Academics/StudentLeave'
+import Sessions from './pages/Dashboard/Home/Sessions'
 // import AddStudent from './pages/Dashboard/AddStudent/AddStudent'
 
 
@@ -24,6 +25,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path='school' element={<Myschool />} />
           <Route path='branch' element={<Home/>} />
+          <Route path='sessions' element={<Sessions/>} />
+
           <Route path='addstudent' element={<AddStudent />} />
           <Route path='editstudent' element={<UserManagement />} />
           <Route path='academics' element={<Academics />} />

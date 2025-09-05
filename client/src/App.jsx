@@ -10,6 +10,11 @@ import UserManagement from './pages/Dashboard/UserManagement/UserManagement'
 import Academics from './pages/Dashboard/Academics/Academics'
 import StudentLeave from './pages/Dashboard/Academics/StudentLeave'
 import Sessions from './pages/Dashboard/Home/Sessions'
+import NoticeBoard from './pages/Dashboard/Academics/NoticeBoard'
+import Enquiry from './pages/Dashboard/Home/Enquiry'
+import ClassesPage from './pages/Dashboard/Home/Classes'
+import Classes from './pages/Dashboard/Home/Classes'
+import Attendance from './pages/Dashboard/Academics/Attendence'
 // import AddStudent from './pages/Dashboard/AddStudent/AddStudent'
 
 
@@ -26,11 +31,15 @@ function App() {
           <Route path='school' element={<Myschool />} />
           <Route path='branch' element={<Home/>} />
           <Route path='sessions' element={<Sessions/>} />
+          <Route path='enquiry' element={<Enquiry/>} />
+          <Route path='classes' element={<Classes/>} />
 
           <Route path='addstudent' element={<AddStudent />} />
           <Route path='editstudent' element={<UserManagement />} />
           <Route path='academics' element={<Academics />} />
           <Route path='studentleave' element={<StudentLeave />} />
+          <Route path='noticeboard' element={<NoticeBoard />} />
+          <Route path='attendence' element={<Attendance/>} />
         </Route>
 
         {/* Root route */}

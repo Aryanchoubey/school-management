@@ -88,13 +88,7 @@ export const SideBar = ({
 
               {isDasboardOpen && (
                 <div className="ml-4 mt-2 bg-amber-400 space-y-2 rounded-2xl overflow-hidden">
-                  <Button
-                    onClick={() => handleNavigation("dashboard")}
-                    variant="ghost"
-                    className="w-full justify-start"
-                  >
-                    Dashboard
-                  </Button>
+                 
 
                   <Button
                     onClick={() => handleNavigation("branch")}
@@ -121,6 +115,13 @@ export const SideBar = ({
                     className="w-full justify-start"
                   >
                     Sessions
+                  </Button>
+                   <Button
+                    onClick={() => handleNavigation("enquiry")}
+                    variant="ghost"
+                    className="w-full justify-start"
+                  >
+                    Enquiry
                   </Button>
                 </div>
               )}
@@ -178,7 +179,7 @@ export const SideBar = ({
                     Time Table
                   </Button>
                   <Button
-                    onClick={() => handleNavigation("attendance")}
+                    onClick={() => handleNavigation("attendence")}
                     variant="ghost"
                     className="w-full justify-start"
                   >

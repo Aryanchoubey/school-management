@@ -157,8 +157,8 @@ export const SideBar = ({
                     variant="ghost"
                     className={`w-full justify-start ${
                       location.pathname.includes("section")
-                        ? "bg-blue-500 text-white"
-                        : "hover:bg-blue-500 hover:text-white"
+                        ? " text-white"
+                        : " hover:text-white"
                     }`}
                   >
                     Section
@@ -172,7 +172,7 @@ export const SideBar = ({
                     Subjects
                   </Button>
                   <Button
-                    onClick={() => handleNavigation("timetable")}
+                    onClick={() => handleNavigation("timetables")}
                     variant="ghost"
                     className="w-full justify-start"
                   >

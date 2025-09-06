@@ -16,6 +16,11 @@ import ClassesPage from './pages/Dashboard/Home/Classes'
 import Classes from './pages/Dashboard/Home/Classes'
 import Attendance from './pages/Dashboard/Academics/Attendence'
 import Settings from './pages/Dashboard/Settings/Settings'
+import Section from './pages/Dashboard/Academics/Section'
+import Class from './pages/Dashboard/Academics/Class'
+import Subjects from './pages/Dashboard/Academics/Subjects'
+import TimeTable from './pages/Dashboard/Academics/TimeTable'
+import HomeWork from './pages/Dashboard/Academics/HomeWork'
 // import AddStudent from './pages/Dashboard/AddStudent/AddStudent'
 
 
@@ -42,6 +47,11 @@ function App() {
           <Route path='noticeboard' element={<NoticeBoard />} />
           <Route path='attendence' element={<Attendance/>} />
           <Route path='settings' element={<Settings/>} />
+          <Route path='class' element={<Class/>} />
+          <Route path='section' element={<Section/>} />
+          <Route path='subjects' element={<Subjects/>} />
+          <Route path='timetables' element={<TimeTable/>} />
+          <Route path='homework' element={<HomeWork/>} />
         </Route>
 
         {/* Root route */}

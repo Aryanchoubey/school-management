@@ -19,13 +19,7 @@ export const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
       </div>
       <div className="flex items-center space-x-4">
         {/* Notification */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="cursor-pointer"
-        >
-          <Bell className="h-6 w-6" />
-        </Button>
+       
 
         {/* Username only in desktop */}
         <span className="hidden lg:inline text-gray-700 font-medium">
@@ -38,6 +32,13 @@ export const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
         </span>
 
         <Button className="cursor-pointer">Buy Now</Button>
+         <Button
+          variant="ghost"
+          size="icon"
+          className="cursor-pointer"
+        >
+          <Bell className="h-6 w-6" />
+        </Button>
       </div>
     </header>
   )

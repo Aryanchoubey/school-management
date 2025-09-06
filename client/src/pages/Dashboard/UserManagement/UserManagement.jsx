@@ -33,7 +33,7 @@ export default function UserManagement() {
         className="w-[95vw] sm:max-w-2xl md:max-w-6xl lg:max-w-7xl h-[85vh] overflow-y-auto rounded-xl border-2 border-gray-300 shadow-2xl"
       >
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold">Edit Student</DialogTitle>
+          <DialogTitle className="text-2xl font-bold">Edit Users</DialogTitle>
           <DialogDescription />
         </DialogHeader>
 

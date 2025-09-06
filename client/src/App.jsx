@@ -21,6 +21,7 @@ import Class from './pages/Dashboard/Academics/Class'
 import Subjects from './pages/Dashboard/Academics/Subjects'
 import TimeTable from './pages/Dashboard/Academics/TimeTable'
 import HomeWork from './pages/Dashboard/Academics/HomeWork'
+import SuperAdmin from './pages/Dashboard/SuperAdmin/SuperAdmin'
 // import AddStudent from './pages/Dashboard/AddStudent/AddStudent'
 
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/dashboard" element={<HomeLayout />}>
           <Route index element={<Home />} />
           <Route path='school' element={<Myschool />} />
+          <Route path='superadmin' element={<SuperAdmin />} />
           <Route path='branch' element={<Home/>} />
           <Route path='sessions' element={<Sessions/>} />
           <Route path='enquiry' element={<Enquiry/>} />

@@ -53,7 +53,7 @@ export const SideBar = ({
               <Button
                 variant="ghost"
                 className="w-full justify-start"
-                onClick={() => handleNavigation("admin")}
+                onClick={() => handleNavigation("superadmin")}
               >
                 Go to super admin
               </Button>

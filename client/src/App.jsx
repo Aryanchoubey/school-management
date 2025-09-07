@@ -22,6 +22,7 @@ import Subjects from './pages/Dashboard/Academics/Subjects'
 import TimeTable from './pages/Dashboard/Academics/TimeTable'
 import HomeWork from './pages/Dashboard/Academics/HomeWork'
 import SuperAdmin from './pages/Dashboard/SuperAdmin/SuperAdmin'
+import Organization from './pages/Dashboard/Organisation/Organisation'
 // import AddStudent from './pages/Dashboard/AddStudent/AddStudent'
 
 
@@ -54,6 +55,7 @@ function App() {
           <Route path='subjects' element={<Subjects/>} />
           <Route path='timetables' element={<TimeTable/>} />
           <Route path='homework' element={<HomeWork/>} />
+          <Route path='organisation' element={<Organization/>} />
         </Route>
 
         {/* Root route */}

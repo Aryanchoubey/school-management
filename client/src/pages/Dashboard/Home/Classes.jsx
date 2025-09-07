@@ -15,11 +15,16 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Filter } from "lucide-react";
-import { DialogDescription } from "@radix-ui/react-dialog";
 
 export default function Classes() {
   const sampleClasses = [
@@ -49,70 +54,56 @@ export default function Classes() {
   }, [query, gradeFilter]);
 
   return (
-    <div className="p-4 md:p-6 lg:p-8">
+    <div className="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="flex items-center justify-between gap-4 mb-6">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl md:text-3xl font-semibold">Classes</h1>
+          <h1 className="text-2xl font-semibold">Classes</h1>
           <p className="text-muted-foreground text-sm">
             Manage classes, teachers, and schedules.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
-          {/* Desktop search + filter */}
-          <div className="hidden sm:flex items-center gap-2">
-            <Input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search classes or teacher..."
-              className="w-[260px]"
-            />
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+          <Input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search classes or teacher..."
+            className="w-full sm:w-64"
+          />
 
-            <Select onValueChange={(v) => setGradeFilter(v)}>
-              <SelectTrigger className="w-[140px]">
-                <SelectValue placeholder="All Grades" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Grades</SelectItem>
-                <SelectItem value="1">Grade 1</SelectItem>
-                <SelectItem value="2">Grade 2</SelectItem>
-                <SelectItem value="4">Grade 4</SelectItem>
-                <SelectItem value="5">Grade 5</SelectItem>
-                <SelectItem value="6">Grade 6</SelectItem>
-                <SelectItem value="7">Grade 7</SelectItem>
-                <SelectItem value="8">Grade 8</SelectItem>
-                <SelectItem value="9">Grade 9</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          <Select onValueChange={(v) => setGradeFilter(v)}>
+            <SelectTrigger className="w-full sm:w-48">
+              <SelectValue placeholder="All Grades" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Grades</SelectItem>
+              <SelectItem value="1">Grade 1</SelectItem>
+              <SelectItem value="2">Grade 2</SelectItem>
+              <SelectItem value="4">Grade 4</SelectItem>
+              <SelectItem value="5">Grade 5</SelectItem>
+              <SelectItem value="6">Grade 6</SelectItem>
+              <SelectItem value="7">Grade 7</SelectItem>
+              <SelectItem value="8">Grade 8</SelectItem>
+              <SelectItem value="9">Grade 9</SelectItem>
+            </SelectContent>
+          </Select>
 
-          {/* Mobile search + filter */}
-          <div className="flex sm:hidden items-center gap-2">
-            <Input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search"
-              className="w-[140px]"
-            />
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setGradeFilter((g) => (g === "all" ? "1" : "all"))}
-            >
-              <Filter size={16} />
-            </Button>
-          </div>
+          <Button
+            variant="outline"
+            onClick={() => setGradeFilter((g) => (g === "all" ? "1" : "all"))}
+          >
+            <Filter size={16} />
+          </Button>
 
-          {/* Add class */}
           <Button onClick={() => setOpenAdd(true)}>
             <Plus size={14} className="mr-2" /> Add Class
           </Button>
         </div>
       </div>
 
-      {/* Class cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Class Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {classes.map((cls) => (
           <Card key={cls.id} className="hover:shadow-lg transition-shadow">
             <CardHeader>
@@ -124,7 +115,7 @@ export default function Classes() {
                   </CardDescription>
                 </div>
                 <div className="flex flex-col items-end">
-                  <Badge className="mb-1 bg-yellow-500 text-black hover:bg-yellow-600">
+                  <Badge className="bg-yellow-500 text-black hover:bg-yellow-600">
                     Grade {cls.grade}
                   </Badge>
                   <span className="text-xs text-muted-foreground">
@@ -135,8 +126,8 @@ export default function Classes() {
             </CardHeader>
 
             <CardContent>
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-muted-foreground">Quick actions:</div>
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
+                <span className="text-sm text-muted-foreground">Quick actions:</span>
                 <div className="flex gap-2">
                   <Button
                     size="sm"
@@ -163,15 +154,15 @@ export default function Classes() {
         )}
       </div>
 
-      {/* Add class dialog */}
+      {/* Add Class Dialog */}
       <Dialog open={openAdd} onOpenChange={setOpenAdd}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="sm:max-w-lg w-full">
           <DialogHeader>
             <DialogTitle>Add new class</DialogTitle>
-            <DialogDescription></DialogDescription>
+            <DialogDescription>Fill the details below.</DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-4 mt-2">
+          <div className="space-y-4 mt-4">
             <div>
               <Label>Class name</Label>
               <Input placeholder="e.g., Class 10 - A" />
@@ -182,7 +173,7 @@ export default function Classes() {
               <Input placeholder="Teacher name" />
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1">
                 <Label>Grade</Label>
                 <Select>
@@ -199,7 +190,7 @@ export default function Classes() {
                 </Select>
               </div>
 
-              <div className="w-32">
+              <div className="w-full sm:w-32">
                 <Label>Students</Label>
                 <Input type="number" placeholder="--" />
               </div>
@@ -215,29 +206,21 @@ export default function Classes() {
         </DialogContent>
       </Dialog>
 
-      {/* View class dialog */}
+      {/* View Class Dialog */}
       <Dialog open={!!selectedClass} onOpenChange={() => setSelectedClass(null)}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md w-full">
           <DialogHeader>
-            <DialogDescription></DialogDescription>
             <DialogTitle>{selectedClass?.name}</DialogTitle>
+            <DialogDescription>Class details</DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-3 mt-2">
-            <p className="text-sm">Teacher: {selectedClass?.teacher}</p>
-            <p className="text-sm">
-              Grade:{" "}
-              <span className="text-yellow-500 font-medium">
-                {selectedClass?.grade}
-              </span>
-            </p>
-            <p className="text-sm">Students: {selectedClass?.students}</p>
+          <div className="space-y-3 mt-4">
+            <p><strong>Teacher:</strong> {selectedClass?.teacher}</p>
+            <p><strong>Grade:</strong> {selectedClass?.grade}</p>
+            <p><strong>Students:</strong> {selectedClass?.students}</p>
 
             <div className="flex justify-end gap-2">
-              <Button
-                variant="ghost"
-                onClick={() => setSelectedClass(null)}
-              >
+              <Button variant="ghost" onClick={() => setSelectedClass(null)}>
                 Close
               </Button>
             </div>

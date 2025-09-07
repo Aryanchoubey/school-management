@@ -4,8 +4,20 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Separator } from "@/components/ui/separator"
+import { useNavigate } from 'react-router-dom';
+
+// In your Profile Component
+
+
+
+
 
 export default function Profile() {
+  const navigate = useNavigate();
+const addNavigation =(path) => {
+    navigate(path)
+
+  }
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 max-w-6xl mx-auto">
       
@@ -25,7 +37,7 @@ export default function Profile() {
         </div>
 
         <div className="flex gap-3 mt-4">
-          <Button>Edit Profile</Button>
+          <Button onClick={() => addNavigation('/dashboard/profile/edit')}>Edit Profile</Button>
           <Button variant="outline">Message</Button>
         </div>
       </Card>

@@ -23,6 +23,7 @@ import TimeTable from './pages/Dashboard/Academics/TimeTable'
 import HomeWork from './pages/Dashboard/Academics/HomeWork'
 import SuperAdmin from './pages/Dashboard/SuperAdmin/SuperAdmin'
 import Organization from './pages/Dashboard/Organisation/Organisation'
+import Profile from './pages/Dashboard/Profile/Profile'
 // import AddStudent from './pages/Dashboard/AddStudent/AddStudent'
 
 
@@ -56,6 +57,7 @@ function App() {
           <Route path='timetables' element={<TimeTable/>} />
           <Route path='homework' element={<HomeWork/>} />
           <Route path='organisation' element={<Organization/>} />
+          <Route path='profile' element={<Profile/>} />
         </Route>
 
         {/* Root route */}

@@ -34,7 +34,7 @@ function App() {
 
         {/* Dashboard Nested Routes */}
         <Route path="/dashboard" element={<HomeLayout />}>
-          <Route index element={<Home />} />
+          <Route index element={<SuperAdmin />} />
           <Route path="school" element={<Myschool />} />
           <Route path="superadmin" element={<SuperAdmin />} />
           <Route path="branch" element={<Home />} />

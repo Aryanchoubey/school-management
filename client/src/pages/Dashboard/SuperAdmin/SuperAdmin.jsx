@@ -24,8 +24,15 @@ import {
   Tooltip,
   Legend,
 } from "recharts"
+import { useNavigate } from "react-router-dom"
+import { Button } from "@/components/ui/button"
 
 export default function SuperAdmin() {
+  const navigate = useNavigate ()
+  const addNavigation =(path) => {
+    navigate(path)
+
+  }
   // --- sample data ---
   const studentStats = { total: 1286, newAdmissions: 34, attendancePct: 92.4 }
   const teacherStats = { total: 78, onLeaveToday: 5 }
@@ -355,15 +362,15 @@ export default function SuperAdmin() {
           <div className={`${neu}`}>
             <div className="text-sm font-medium mb-3">Shortcuts</div>
             <div className="grid grid-cols-2 gap-3 text-sm">
-              <button className="p-3 rounded-xl bg-white shadow-inner flex items-center gap-2">
+              <Button onClick={() => addNavigation('/dashboard/timetables')}  className="p-3 rounded-xl bg-white shadow-inner flex items-center gap-2">
                 <BookOpen size={16} /> Timetable
-              </button>
+              </Button>
               <button className="p-3 rounded-xl bg-white shadow-inner flex items-center gap-2">
                 <DollarSign size={16} /> Fees
               </button>
-              <button className="p-3 rounded-xl bg-white shadow-inner flex items-center gap-2">
+             <Button onClick={() => addNavigation('/dashboard/attendence')}  className="p-3 rounded-xl bg-white shadow-inner flex items-center gap-2">
                 <CheckCircle size={16} /> Attendance
-              </button>
+              </Button>
               <button className="p-3 rounded-xl bg-white shadow-inner flex items-center gap-2">
                 <FileText size={16} /> Reports
               </button>

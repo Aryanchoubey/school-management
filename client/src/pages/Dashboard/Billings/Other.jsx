@@ -14,9 +14,9 @@ export  function Other() {
   ])
   const [newRecord, setNewRecord] = useState({
     type: "Staff Salary",
-    name: "",
-    amount: "",
-    date: ""
+    name: "aniket",
+    amount: "12000",
+    date: "01/02/2025"
   })
 
   const handleAddRecord = () => {

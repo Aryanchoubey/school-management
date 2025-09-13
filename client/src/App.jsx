@@ -27,6 +27,7 @@ import EditProfile from './pages/Dashboard/Profile/EditPofile';
 import StudentFee from './pages/Dashboard/Billings/Fee';
 import Fee from './pages/Dashboard/Billings/Fee';
 import { Salary } from './pages/Dashboard/Billings/Salary';
+import { Other } from './pages/Dashboard/Billings/Other';
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
           <Route path="organisation" element={<Organization />} />
           <Route path="fee" element={<Fee />} />
           <Route path="salary" element={<Salary />} />
+          <Route path="other" element={<Other />} />
 
           {/* Profile and Edit Profile Nested Routes */}
           <Route path="profile" element={<Profile />} />

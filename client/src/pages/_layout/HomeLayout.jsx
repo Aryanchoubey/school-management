@@ -7,6 +7,7 @@ export const HomeLayout = () => {
   const [isDasboardOpen, setIsDasboardOpen] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isAcademicsOpen, setIsAcademicsOpen] = useState(false)
+  const [isBillingOpen, setIsBillingOpen] = useState(false)
 
   return (
     <div className="flex flex-col min-h-screen w-full">
@@ -27,6 +28,8 @@ export const HomeLayout = () => {
             setIsSidebarOpen={setIsSidebarOpen}
             isAcademicsOpen={isAcademicsOpen}
             setIsAcademicsOpen={setIsAcademicsOpen}
+            isBillingOpen={isBillingOpen}
+            setIsBillingOpen={setIsBillingOpen}
           />
         </aside>
 

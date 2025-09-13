@@ -24,6 +24,9 @@ import SuperAdmin from './pages/Dashboard/SuperAdmin/SuperAdmin';
 import Organization from './pages/Dashboard/Organisation/Organisation';
 import Profile from './pages/Dashboard/Profile/Profile';
 import EditProfile from './pages/Dashboard/Profile/EditPofile';
+import StudentFee from './pages/Dashboard/Billings/Fee';
+import Fee from './pages/Dashboard/Billings/Fee';
+import { Salary } from './pages/Dashboard/Billings/Salary';
 
 function App() {
   return (
@@ -55,6 +58,8 @@ function App() {
           <Route path="timetables" element={<TimeTable />} />
           <Route path="homework" element={<HomeWork />} />
           <Route path="organisation" element={<Organization />} />
+          <Route path="fee" element={<Fee />} />
+          <Route path="salary" element={<Salary />} />
 
           {/* Profile and Edit Profile Nested Routes */}
           <Route path="profile" element={<Profile />} />

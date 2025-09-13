@@ -10,7 +10,9 @@ export const SideBar = ({
   isDasboardOpen,
   setIsDasboardOpen,
    isAcademicsOpen={isAcademicsOpen}   ,     // 👈 pass value
-        setIsAcademicsOpen={setIsAcademicsOpen} 
+        setIsAcademicsOpen={setIsAcademicsOpen} ,
+   isBillingOpen={isBillingOpen}   ,     // 👈 pass value
+        setIsBillingOpen={setIsBillingOpen} 
 }) => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -96,7 +98,7 @@ export const SideBar = ({
                     className={`w-full justify-start ${
                       location.pathname.includes("branch")
                         ? "bg-[#0f1a3c] text-white"
-                        : "hover:bg-[#0f1a3c] hover:text-white"
+                        : "hover:bg-[#0f1a3c]"
                     }`}
                   >
                     Add Branch
@@ -105,21 +107,33 @@ export const SideBar = ({
                   <Button
                     onClick={() => handleNavigation("classes")}
                     variant="ghost"
-                    className="w-full justify-start"
+                     className={`w-full justify-start ${
+                      location.pathname.includes("classes")
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
                   >
                     Classes
                   </Button>
                   <Button
                     onClick={() => handleNavigation("sessions")}
                     variant="ghost"
-                    className="w-full justify-start"
+                     className={`w-full justify-start ${
+                      location.pathname.includes("sessions")
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
                   >
                     Sessions
                   </Button>
                    <Button
                     onClick={() => handleNavigation("enquiry")}
                     variant="ghost"
-                    className="w-full justify-start"
+                     className={`w-full justify-start ${
+                      location.pathname.includes("enquiry")
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
                   >
                     Enquiry
                   </Button>
@@ -147,7 +161,11 @@ export const SideBar = ({
                   <Button
                     onClick={() => handleNavigation("class")}
                     variant="ghost"
-                    className="w-full justify-start"
+                     className={`w-full justify-start ${
+                      location.pathname.includes("class")
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
                   >
                     Class
                   </Button>
@@ -167,42 +185,66 @@ export const SideBar = ({
                   <Button
                     onClick={() => handleNavigation("subjects")}
                     variant="ghost"
-                    className="w-full justify-start"
+                     className={`w-full justify-start ${
+                      location.pathname.includes("subjects")
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
                   >
                     Subjects
                   </Button>
                   <Button
                     onClick={() => handleNavigation("timetables")}
                     variant="ghost"
-                    className="w-full justify-start"
+                     className={`w-full justify-start ${
+                      location.pathname.includes("timetables")
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
                   >
                     Time Table
                   </Button>
                   <Button
                     onClick={() => handleNavigation("attendence")}
                     variant="ghost"
-                    className="w-full justify-start"
+                    className={`w-full justify-start ${
+                      location.pathname.includes("attendence")
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
                   >
                     Attendance
                   </Button>
                   <Button
                     onClick={() => handleNavigation("studentleave")}
                     variant="ghost"
-                    className="w-full justify-start"
+                    className={`w-full justify-start ${
+                      location.pathname.includes("studentleave")
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
                   >
                     Student Leave
                   </Button>
                   <Button
                     onClick={() => handleNavigation("homework")}
                     variant="ghost"
-                    className="w-full justify-start"
+                     className={`w-full justify-start ${
+                      location.pathname.includes("homework")
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
                   >
                     Home Work
                   </Button>
                   <Button
                     onClick={() => handleNavigation("noticeboard")}
                     variant="ghost"
-                    className="w-full justify-start"
+                     className={`w-full justify-start ${
+                      location.pathname.includes("noticeboard")
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
                   >
                     Notice Board
                   </Button>
@@ -216,8 +258,8 @@ export const SideBar = ({
               variant="ghost"
               className={`w-full justify-start ${
                 location.pathname.includes("editstudent")
-                  ? "bg-primary text-white"
-                  : "hover:bg-primary hover:text-white"
+                  ? " bg-amber-400 text-white"
+                  : " hover:text-white"
               }`}
             >
               User Management
@@ -226,28 +268,83 @@ export const SideBar = ({
             <Button
               onClick={() => handleNavigation("organisation")}
               variant="ghost"
-              className="w-full justify-start"
+              className={`w-full justify-start ${
+                      location.pathname.includes("organisation")
+                        ? " bg-amber-400 text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
             >
               Organisation
             </Button>
             <Button
               onClick={() => handleNavigation("settings")}
               variant="ghost"
-              className="w-full justify-start"
+              className={`w-full justify-start ${
+                      location.pathname.includes("settings")
+                        ? " bg-amber-400 text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
             >
               Setting
             </Button>
-            <Button
-              onClick={() => handleNavigation("billing")}
-              variant="ghost"
-              className="w-full justify-start"
-            >
-              Billing
-            </Button>
+           
+              <Button
+                variant="ghost"
+                className="w-full justify-between hover:text-white hover:bg-primary"
+                onClick={() => setIsBillingOpen(!isBillingOpen)}
+              >
+                <span>Billing</span>
+                {isBillingOpen ? (
+                  <ChevronDown className="h-4 w-4" />
+                ) : (
+                  <ChevronRight className="h-4 w-4" />
+                )}
+              </Button>
+              {isBillingOpen && (
+                 <div className="ml-4 mt-2 bg-amber-400 space-y-2 rounded-2xl overflow-hidden">
+                  <Button
+                    onClick={() => handleNavigation("fee")}
+                    variant="ghost"
+                    className={`w-full justify-start ${
+                      location.pathname.includes("fee")
+                        ? "bg-[#0f1a3c] text-white"
+                        : " hover:text-white"
+                    }`}
+                  >
+                    Student Fee
+                  </Button>
+                  <Button
+                    onClick={() => handleNavigation("salary")}
+                    variant="ghost"
+                    className={`w-full justify-start ${
+                      location.pathname.includes("salary")
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
+                  >
+                   Salary
+                  </Button><Button
+                    onClick={() => handleNavigation("other")}
+                    variant="ghost"
+                    className={`w-full justify-start ${
+                      location.pathname.includes("other")
+                        ? "bg-[#0f1a3c] text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
+                  >
+                    Other
+                  </Button>
+                 </div>
+
+              )}
             <Button
               onClick={() => handleNavigation("profile")}
               variant="ghost"
-              className="w-full justify-start"
+               className={`w-full justify-start ${
+                      location.pathname.includes("profile")
+                        ? " bg-amber-400 text-white"
+                        : "hover:bg-[#0f1a3c] hover:text-white"
+                    }`}
             >
               Profile
             </Button>

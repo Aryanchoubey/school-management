@@ -1,9 +1,24 @@
 import { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export function Salary() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -28,7 +43,7 @@ export function Salary() {
   };
 
   return (
-    <div className="p-4 max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto px-0 sm:px-4 md:px-6 lg:px-8">
       <h1 className="text-2xl font-bold mb-6">Teacher Salary Records</h1>
 
       {/* Dialog to Add New Salary Record */}
@@ -37,13 +52,13 @@ export function Salary() {
           <Button className="mb-4">Add New Teacher Salary</Button>
         </DialogTrigger>
 
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md p-0 sm:p-6">
           <DialogHeader>
             <DialogTitle>Add Salary Record</DialogTitle>
             <DialogDescription>Enter teacher salary details</DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-4">
+          <div className="space-y-4 p-0 sm:p-4">
             <Input
               placeholder="Teacher Name"
               value={formData.name}
@@ -78,11 +93,12 @@ export function Salary() {
       </Dialog>
 
       {/* Teacher Salary Table */}
-      <Card>
+      <Card className="w-full sm:w-full p-0 sm:p-6">
         <CardHeader>
           <CardTitle>Salary Payment Records</CardTitle>
         </CardHeader>
-        <CardContent className="overflow-x-auto">
+
+        <CardContent className="overflow-x-auto p-0 sm:p-4">
           <Table>
             <TableHeader>
               <TableRow>
@@ -93,6 +109,7 @@ export function Salary() {
                 <TableHead>Status</TableHead>
               </TableRow>
             </TableHeader>
+
             <TableBody>
               {teacherSalaries.map((record, idx) => (
                 <TableRow key={idx}>

@@ -1,22 +1,34 @@
 import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export  function Other() {
+export function Other() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [records, setRecords] = useState([
     { id: 1, type: "Staff Salary", name: "Mr. Aryan", amount: "25000", date: "2025-09-10" },
     { id: 2, type: "Other Charges", name: "Electricity Bill", amount: "5000", date: "2025-09-12" },
   ])
+
   const [newRecord, setNewRecord] = useState({
     type: "Staff Salary",
     name: "aniket",
     amount: "12000",
-    date: "01/02/2025"
+    date: "01/02/2025",
   })
 
   const handleAddRecord = () => {
@@ -27,19 +39,19 @@ export  function Other() {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto px-0 sm:px-4 md:px-6 lg:px-8">
       <h1 className="text-3xl font-bold mb-6">Staff Salary & Other Charges</h1>
 
       <Button onClick={() => setIsDialogOpen(true)} className="mb-6">
         Add New Record
       </Button>
 
-      <Card className="overflow-x-auto">
+      <Card className="overflow-x-auto p-0 sm:p-6">
         <CardHeader>
           <CardTitle>Records</CardTitle>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="p-0 sm:p-4">
           <table className="w-full table-auto">
             <thead className="bg-gray-100">
               <tr>
@@ -66,12 +78,12 @@ export  function Other() {
       </Card>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md p-0 sm:p-6">
           <DialogHeader>
             <DialogTitle>Add Salary / Other Charge</DialogTitle>
           </DialogHeader>
 
-          <div className="flex flex-col gap-4 mt-4">
+          <div className="flex flex-col gap-4 mt-4 p-0 sm:p-4">
             <Label>Type</Label>
             <Select
               value={newRecord.type}

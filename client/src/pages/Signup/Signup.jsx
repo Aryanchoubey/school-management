@@ -70,6 +70,8 @@ const isStep1Valid = () => {
   const { firstName, lastName, email, phone, password } = formData
   return firstName && lastName && email && phone && password
 }
+axios.post(`${import.meta.env.VITE_API_URL}/api/signup`, signupData)
+
 
 
 

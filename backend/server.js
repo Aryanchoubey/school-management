@@ -2,16 +2,19 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import dotenv from 'dotenv';
+dotenv.config()
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // Connect MongoDB
-mongoose
-  .connect("mongodb://localhost:27017/schoolDB")
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.log("❌ DB Connection Error:", err));
+// import mongoose from "mongoose";
+
+mongoose.connect(process.env.MONGODB_URL)
+  .then(() => console.log("Connected!"))
+  .catch(err => console.log(err));
 
 // ------------------ User Schema ------------------
 const userSchema = new mongoose.Schema({

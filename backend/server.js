@@ -81,10 +81,10 @@ app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if (!user) return res.status(401).json({ success: false, message: "User not found" });
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json({ success: false, message: "Incorrect password" });
+    if (!isMatch) return res.status(400).json({ success: false, message: "Incorrect password" });
 
     res.json({ success: true, message: "Login successful", token: "fake-jwt-token" });
   } catch (error) {

@@ -52,7 +52,7 @@ export default function Signup() {
         paymentMethod,
       }
 
-      const response = await axios.post("http://localhost:5000/api/signup", signupData)
+      const response = await axios.post("https://school-management-s6lr.onrender.com/api/signup", signupData)
 
       if (response.data.success) {
         console.log("✅ Signup success:", response.data)
@@ -70,7 +70,7 @@ const isStep1Valid = () => {
   const { firstName, lastName, email, phone, password } = formData
   return firstName && lastName && email && phone && password
 }
-axios.post(`${import.meta.env.VITE_API_URL}/api/signup`, signupData)
+// axios.post(`${import.meta.env.VITE_API_URL}/api/signup`, signupData)
 
 
 

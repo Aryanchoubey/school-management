@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { Link } from "react-router-dom"
+import axios from "axios"
 
 // Import step components
 import Accountinfo from "./components/AccountInfo"
@@ -17,10 +18,60 @@ export default function Signup() {
   const [success, setSuccess] = useState(false)
   const [selectedPlan, setSelectedPlan] = useState(null)
   const [paymentMethod, setPaymentMethod] = useState("upi")
+    // const [searchParams] = useSearchParams()
+
+
+  // ✅ Add form data state
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    password: "",
+  })
 
   const nextStep = () => setStep((prev) => Math.min(prev + 1, 4))
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1))
-  const handleDone = () => setSuccess(true)
+
+  // ✅ Handle signup
+  const handleDone = async () => {
+    try {
+      const { firstName, lastName, email, phone, password } = formData
+
+      if (!firstName || !lastName || !email || !phone || !password) {
+        alert("⚠ Please fill all fields")
+        return
+      }
+
+      const signupData = {
+        name: `${firstName} ${lastName}`,
+        email,
+        password,
+        phone,
+        plan: selectedPlan,
+        paymentMethod,
+      }
+
+      const response = await axios.post("http://localhost:5000/api/signup", signupData)
+
+      if (response.data.success) {
+        console.log("✅ Signup success:", response.data)
+        setSuccess(true)
+      } else {
+        alert("❌ " + response.data.message)
+      }
+    } catch (error) {
+      console.error("Signup Error:", error)
+      alert("Something went wrong. Please try again.")
+    }
+  }
+  // Step 1: Check if all inputs are filled
+const isStep1Valid = () => {
+  const { firstName, lastName, email, phone, password } = formData
+  return firstName && lastName && email && phone && password
+}
+
+
 
 
   if (success) {
@@ -53,7 +104,7 @@ export default function Signup() {
             Setup your Account
           </CardTitle>
 
-          {/* Steps Progress */}
+          {/* Step indicator */}
           <div className="flex justify-center gap-6 mt-4">
             {[1, 2, 3, 4].map((i) => (
               <div
@@ -77,7 +128,8 @@ export default function Signup() {
         </CardHeader>
 
         <CardContent className="p-6">
-          {step === 1 && <Accountinfo />}
+          {/* ✅ Pass formData and setFormData to Accountinfo */}
+          {step === 1 && <Accountinfo formData={formData} setFormData={setFormData} />}
           {step === 2 && (
             <Plans
               selectedPlan={selectedPlan}
@@ -93,7 +145,7 @@ export default function Signup() {
           {step === 4 && <Otp />}
         </CardContent>
 
-        {/* Navigation */}
+        {/* Navigation buttons */}
         <div className="flex justify-between items-center p-6">
           <Button
             variant="outline"
@@ -107,6 +159,7 @@ export default function Signup() {
           {step < 4 ? (
             <Button
               onClick={() => {
+               
                 if (step === 2 && !selectedPlan) {
                   alert("⚠ Please select a plan before proceeding")
                   return
@@ -118,6 +171,7 @@ export default function Signup() {
                 nextStep()
               }}
               className="flex items-center gap-2"
+              disabled={step === 1 && !isStep1Valid()}
             >
               Next <ArrowRight size={16} />
             </Button>
@@ -125,6 +179,7 @@ export default function Signup() {
             <Button
               onClick={handleDone}
               className="bg-yellow-500 hover:bg-yellow-600"
+               disabled={!isStep1Valid()}
             >
               Done
             </Button>
@@ -134,4 +189,3 @@ export default function Signup() {
     </div>
   )
 }
-

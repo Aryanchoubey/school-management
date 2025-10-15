@@ -175,7 +175,7 @@ export const SideBar = ({
                     variant="ghost"
                     className={`w-full justify-start ${
                       location.pathname.includes("section")
-                        ? " text-white"
+                        ? "bg-[#0f1a3c] text-white"
                         : " hover:text-white"
                     }`}
                   >

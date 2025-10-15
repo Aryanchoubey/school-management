@@ -3,19 +3,51 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const navigateToSignup = () => navigate("/signup");
-  const navigateToHome = () => navigate("/dashboard");
-   // ✅ link to Home
+
+ const handleLogin = async () => {
+  setLoading(true);
+  setError("");
+
+  try {
+    const res = await axios.post("http://localhost:5000/api/login", {
+      email,
+      password,
+    });
+
+    // This block runs only if the response is 2xx
+    if (res.data.success) {
+      localStorage.setItem("token", res.data.token);
+      navigate("/dashboard");
+    } else {
+      setError(res.data.message || "Login failed");
+    }
+  } catch (err) {
+    console.error(err);
+
+    // ✅ Check if server responded
+    if (err.response && err.response.data) {
+      setError(err.response.data.message || "Login failed");
+    } else {
+      setError("Server not responding");
+    }
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      
       <Card className="w-full max-w-6xl mx-auto shadow-2xl overflow-hidden">
         <div className="flex flex-col lg:flex-row min-h-[600px]">
           {/* Left side - Image */}
@@ -74,13 +106,18 @@ const Login = () => {
               />
             </div>
 
+            {/* Error Message */}
+            {error && (
+              <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+            )}
+
             {/* Forgot Password and Submit */}
             <div className="flex justify-between items-center mb-8">
               <Button variant="link" className="text-gray-600 pl-0 underline">
                 Forgot Password?
               </Button>
-              <Button onClick={navigateToHome} size="lg">
-                Login
+              <Button onClick={handleLogin} disabled={loading} size="lg">
+                {loading ? "Logging in..." : "Login"}
               </Button>
             </div>
 
@@ -101,3 +138,4 @@ const Login = () => {
 };
 
 export default Login;
+

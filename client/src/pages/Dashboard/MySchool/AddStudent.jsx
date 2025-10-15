@@ -1,24 +1,84 @@
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent } from "@/components/ui/card"
-import { Textarea } from "@/components/ui/textarea"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 export default function AddStudent() {
-  const [gender, setGender] = useState("male")
+  const [gender, setGender] = useState("male");
   const navigate = useNavigate()
   const studentnavigation = (path) => {
-navigate(path)
+    navigate(path);
+  };
+   const [success, setSuccess] = useState(false)
+  const [formData, setFormData] = useState({
+    studentname: "",
+    fathername: "",
+    mothername: "",
+    phone: "",
+   email: "",
+   address:"",
+   taxnumber :"",
+   registrationnumber:"",
+   bloodgroup:"",
+   pincodenumber:"",
+
+  });
+ const handleDone = async () => {
+    try {
+      const { studentname, fathername, mothername, phone, email, address,taxnumber ,registrationnumber,bloodgroup, pincodenumber } = formData
+
+      if (!studentname || !fathername|| !email || !phone || ! pincodenumber || !mothername || !address || !taxnumber ||!registrationnumber || !bloodgroup) {
+        alert("⚠ Please fill all fields")
+        return
+      }
+
+      const addstudentdetail = {
+        name: `${studentname} ${mothername} ${fathername}`,
+        email,
+        address,
+        phone,
+       pincodenumber,
+       taxnumber,
+       registrationnumber,
+       bloodgroup,
+      }
+
+      const response = await axios.post("http://localhost:5000/api/addstudent", addstudentdetail)
+
+      if (response.data.success) {
+        console.log("✅ add student:", response.data)
+        setSuccess(true)
+        setTimeout(() => {
+        navigate("/dashboard/school") // or "/login"
+      }, 1000)
+      } else {
+        alert("❌ " + response.data.message)
+      }
+    } catch (error) {
+      console.error("Signup Error:", error)
+      alert("Something went wrong. Please try again.")
+    }
+  }
+  const isStudentDetailValid =()=>{
+    const {studentname,fathername, mothername,taxnumber, registrationnumber, phone,email,bloodgroup,address,pincodenumber } = formData
   }
 
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
-      
 
       {/* Main Form */}
       <main className="flex-1 p-6">
@@ -32,17 +92,23 @@ navigate(path)
                   alt="profile"
                   className="w-28 h-28 rounded-full object-cover"
                 />
-                 <div className="col-span-2 flex flex-col gap-2">
-              <Label>Upload Photo</Label>
-              <Input type="file" />
-            </div>
+                <div className="col-span-2 flex flex-col gap-2">
+                  <Label>Upload Photo</Label>
+                  <Input type="file" />
+                </div>
               </div>
 
               {/* Form Section */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
                 <div>
                   <Label>Student Name</Label>
-                  <Input placeholder="Enter student name" />
+                  <Input
+                    placeholder="Enter student name"
+                    value={formData.studentname}
+                    onChange={(e) =>
+                      setFormData({ ...formData, studentname: e.target.value })
+                    }
+                  />
                 </div>
                 <div>
                   <Label>District</Label>
@@ -60,34 +126,68 @@ navigate(path)
 
                 <div>
                   <Label>Father's Name</Label>
-                  <Input placeholder="Enter father's name" />
+                  <Input 
+                   value={formData.fathernamename}
+                    onChange={(e) =>
+                      setFormData({ ...formData, fathername: e.target.value })
+                    }
+                  placeholder="Enter father's name" />
                 </div>
                 <div>
                   <Label>Phone No.</Label>
-                  <Input placeholder="+91 9876543210" />
+                  <Input value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
+                   placeholder="+91 9876543210" />
                 </div>
 
                 <div>
                   <Label>Mother's Name</Label>
-                  <Input placeholder="Enter mother's name" />
+                  <Input
+                   value={formData.mothername}
+                    onChange={(e) =>
+                      setFormData({ ...formData,mothername: e.target.value })
+                    }
+                  placeholder="Enter mother's name" />
                 </div>
                 <div>
                   <Label>Tax Number</Label>
-                  <Input placeholder="Enter tax number" />
+                  <Input
+                   value={formData.taxnumber}
+                    onChange={(e) =>
+                      setFormData({ ...formData, taxnumber: e.target.value })
+                    }
+                  placeholder="Enter tax number" />
                 </div>
 
                 <div className="md:col-span-2">
                   <Label>Address</Label>
-                  <Textarea placeholder="Enter address" />
+                  <Textarea
+                   value={formData.address}
+                    onChange={(e) =>
+                      setFormData({ ...formData, address: e.target.value })
+                    }
+                   placeholder="Enter address" />
                 </div>
 
                 <div>
                   <Label>Registration No.</Label>
-                  <Input placeholder="Enter registration no." />
+                  <Input
+                   value={formData.registrationnumber}
+                    onChange={(e) =>
+                      setFormData({ ...formData, registrationnumber: e.target.value })
+                    }
+                  placeholder="Enter registration no." />
                 </div>
                 <div>
                   <Label>Email</Label>
-                  <Input type="email" placeholder="Enter email" />
+                  <Input 
+                   value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                  type="email" placeholder="Enter email" />
                 </div>
 
                 <div>
@@ -96,7 +196,12 @@ navigate(path)
                 </div>
                 <div>
                   <Label>Blood Group</Label>
-                  <Input placeholder="e.g. B+" />
+                  <Input 
+                   value={formData.bloodgroup}
+                    onChange={(e) =>
+                      setFormData({ ...formData, bloodgroup: e.target.value })
+                    }
+                  placeholder="e.g. B+" />
                 </div>
 
                 <div className="md:col-span-2">
@@ -123,7 +228,12 @@ navigate(path)
 
                 <div>
                   <Label>Pincode</Label>
-                  <Input placeholder="Enter pincode" />
+                  <Input
+                   value={formData.pincodenumber}
+                    onChange={(e) =>
+                      setFormData({ ...formData, pincodenumber: e.target.value })
+                    }
+                  placeholder="Enter pincode" />
                 </div>
                 <div>
                   <Label>State</Label>
@@ -148,7 +258,10 @@ navigate(path)
 
             {/* Save Button */}
             <div className="flex justify-end mt-6">
-              <Button  onClick={() => studentnavigation ('/dashboard/school')} className="bg-yellow-400 hover:bg-yellow-500 text-black px-6">
+              <Button
+                onClick={handleDone}
+                className="bg-yellow-400 hover:bg-yellow-500 text-black px-6"
+              >
                 Save
               </Button>
             </div>
@@ -156,5 +269,5 @@ navigate(path)
         </Card>
       </main>
     </div>
-  )
+  );
 }

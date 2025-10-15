@@ -56,7 +56,7 @@ export default function AddStudent() {
        bloodgroup,
       }
 
-      const response = await axios.post("http://localhost:5000/api/addstudent", addstudentdetail)
+      const response = await axios.post("https://school-management-s6lr.onrender.com/api/addstudent", addstudentdetail)
 
       if (response.data.success) {
         console.log("✅ add student:", response.data)

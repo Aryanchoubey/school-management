@@ -18,7 +18,7 @@ export default function Myschool() {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/students");
+        const res = await axios.get("https://school-management-s6lr.onrender.com/api/students");
         if (res.data.success) setStudents(res.data.students);
       } catch (err) {
         console.error("Error fetching students:", err);
@@ -30,7 +30,7 @@ export default function Myschool() {
     if (!window.confirm("Are you sure you want to delete this student?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/students/${id}`);
+      await axios.delete(`https://school-management-s6lr.onrender.com/api/students/${id}`);
       // Remove student from UI
       setStudents(students.filter((s) => s._id !== id));
     } catch (error) {

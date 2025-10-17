@@ -46,7 +46,7 @@ export default function Classes() {
   // ----------------- FETCH CLASSES -----------------
   const fetchClasses = async () => {
     try {
-      const res = await axios.get(API_URL);
+      const res = await axios.get("http://localhost:5000/api/classes");
       if (res.data.success) {
         setClasses(res.data.classes);
       }

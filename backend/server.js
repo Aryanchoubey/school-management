@@ -8,6 +8,7 @@ dotenv.config()
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Connect MongoDB
 // import mongoose from "mongoose";
@@ -181,22 +182,45 @@ app.put("/api/students/:id", async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
+// ------------------ Classes APIs ------------------
+
+// Get all classes
+// ✅ Get all classes
+app.get("/api/classes", async (req, res) => {
+  try {
+    const classes = await Class.find();
+    res.json({ success: true, classes });
+  } catch (error) {
+    console.error("Error fetching classes:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+
+
+// Add a new class
 app.post("/api/classes", async (req, res) => {
   try {
-    const { name, teacher, students, grade } = req.body;
+    console.log("Received body:", req.body); // Debugging
+
+    const { name, teacher, students, grade } = req.body || {};
+
     if (!name || !teacher || !students || !grade) {
-      return res.status(400).json({ success: false, message: "All fields are required" });
+      return res.status(400).json({ success: false, message: "Missing fields" });
     }
 
     const newClass = new Class({ name, teacher, students, grade });
     await newClass.save();
 
-    res.json({ success: true, class: newClass });
+    res.status(201).json({ success: true, class: newClass });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, message: "Server error" });
+    console.error("Error adding class:", err);
+    res.status(500).json({ success: false, message: err.message });
   }
 });
+
+
+// Update class
 app.put("/api/classes/:id", async (req, res) => {
   try {
     const updatedClass = await Class.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -207,6 +231,8 @@ app.put("/api/classes/:id", async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
+
+// Delete class
 app.delete("/api/classes/:id", async (req, res) => {
   try {
     const deletedClass = await Class.findByIdAndDelete(req.params.id);
@@ -217,7 +243,6 @@ app.delete("/api/classes/:id", async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
-
 
 
 

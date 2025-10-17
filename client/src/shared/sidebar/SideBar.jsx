@@ -4,6 +4,7 @@ import { Overlay } from "../Overlay/Overlay"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { useNavigate, useLocation } from "react-router-dom"
 
+
 export const SideBar = ({
   isSidebarOpen,
   setIsSidebarOpen,
@@ -17,6 +18,7 @@ export const SideBar = ({
   const navigate = useNavigate()
   const location = useLocation()
   const isMobile = useIsMobile()
+  // const isDesktop = useIsDesktop()
 
   const handleNavigation = (path) => {
     navigate(path)
@@ -353,7 +355,7 @@ export const SideBar = ({
       </aside>
 
       {/* ✅ Overlay only on mobile */}
-      {isMobile && <Overlay isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />}
+      {<Overlay isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />}
     </>
   )
 }

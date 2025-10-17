@@ -14,25 +14,32 @@ export default function Myschool() {
     navigate(path);
   };
 
-  // Fetch students from API
+  const handleEdit = (student) => {
+    console.log("Editing student:", student); // debug
+    navigate("/dashboard/addstudent", { state: { studentData: student } });
+  };
+
   useEffect(() => {
     const fetchStudents = async () => {
       try {
         const res = await axios.get("https://school-management-s6lr.onrender.com/api/students");
-        if (res.data.success) setStudents(res.data.students);
+        if (res.data.success) {
+          setStudents(res.data.students);
+        } else {
+          console.error("Failed to fetch students:", res.data);
+        }
       } catch (err) {
         console.error("Error fetching students:", err);
       }
     };
     fetchStudents();
   }, []);
-   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this student?")) return;
 
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this student?")) return;
     try {
       await axios.delete(`https://school-management-s6lr.onrender.com/api/students/${id}`);
-      // Remove student from UI
-      setStudents(students.filter((s) => s._id !== id));
+      setStudents((prev) => prev.filter((s) => s._id !== id));
     } catch (error) {
       console.error("Error deleting student:", error);
       alert("Failed to delete student.");
@@ -42,7 +49,6 @@ export default function Myschool() {
   return (
     <div className="flex min-h-screen bg-gray-100">
       <main className="flex-1 flex flex-col p-6">
-        {/* Top Bar */}
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
           <Input placeholder="Search Student..." className="max-w-xs" />
           <div className="flex gap-2 flex-wrap">
@@ -58,10 +64,9 @@ export default function Myschool() {
           </div>
         </div>
 
-        {/* Student Table */}
-        <div className="hidden md:block">
+        <div>
           <Card>
-            <CardContent>
+            <CardContent className="p-0">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead className="bg-gray-100 text-left">
@@ -79,14 +84,17 @@ export default function Myschool() {
                         <td className="p-3">{s.name}</td>
                         <td className="p-3">{s.email}</td>
                         <td className="p-3 flex gap-2">
-                          <Button variant="ghost" size="icon">
-                            <Eye className="h-4 w-4" />
+                          <Button className="hidden md:block" variant="ghost" size="icon">
+                            <Eye className="h-4 w-4 hidden md:block" />
                           </Button>
-                          <Button variant="ghost" size="icon">
+
+                          {/* IMPORTANT: pass 's' not 'students' */}
+                          <Button onClick={() => handleEdit(s)} variant="ghost" size="icon">
                             <Settings className="h-4 w-4" />
                           </Button>
+
                           <Button
-                          onClick={()=>handleDelete(s._id)}
+                            onClick={() => handleDelete(s._id)}
                             variant="ghost"
                             size="icon"
                             className="text-red-500"
@@ -103,7 +111,6 @@ export default function Myschool() {
           </Card>
         </div>
 
-        {/* Mobile Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
           {students.map((s) => (
             <Card key={s._id}>

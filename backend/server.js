@@ -42,6 +42,14 @@ const studentSchema = new mongoose.Schema({
 });
 
 const Student = mongoose.model("Student", studentSchema);
+const classSchema = new mongoose.Schema({
+  name: String,
+  teacher: String,
+  students: Number,
+  grade: String,
+});
+
+const Class = mongoose.model("Class", classSchema);
 
 
 // ------------------ Routes ------------------
@@ -153,6 +161,63 @@ app.delete("/api/students/:id", async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
+// Update (Edit) Student by ID
+app.put("/api/students/:id", async (req, res) => {
+  try {
+    const studentId = req.params.id;
+    const updatedData = req.body;
+
+    const updatedStudent = await Student.findByIdAndUpdate(studentId, updatedData, {
+      new: true, // return the updated document
+    });
+
+    if (!updatedStudent) {
+      return res.status(404).json({ success: false, message: "Student not found" });
+    }
+
+    res.json({ success: true, message: "Student updated successfully", student: updatedStudent });
+  } catch (error) {
+    console.error("Error updating student:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+app.post("/api/classes", async (req, res) => {
+  try {
+    const { name, teacher, students, grade } = req.body;
+    if (!name || !teacher || !students || !grade) {
+      return res.status(400).json({ success: false, message: "All fields are required" });
+    }
+
+    const newClass = new Class({ name, teacher, students, grade });
+    await newClass.save();
+
+    res.json({ success: true, class: newClass });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+app.put("/api/classes/:id", async (req, res) => {
+  try {
+    const updatedClass = await Class.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updatedClass) return res.status(404).json({ success: false, message: "Class not found" });
+    res.json({ success: true, class: updatedClass });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+app.delete("/api/classes/:id", async (req, res) => {
+  try {
+    const deletedClass = await Class.findByIdAndDelete(req.params.id);
+    if (!deletedClass) return res.status(404).json({ success: false, message: "Class not found" });
+    res.json({ success: true, message: "Class deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
 
 
 

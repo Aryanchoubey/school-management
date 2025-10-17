@@ -355,7 +355,7 @@ export const SideBar = ({
       </aside>
 
       {/* ✅ Overlay only on mobile */}
-      {<Overlay isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />}
+      {isMobile && <Overlay isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />}
     </>
   )
 }
